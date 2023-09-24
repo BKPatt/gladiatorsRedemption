@@ -7,6 +7,7 @@ public class NewScript_bschofill3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print("Hello world");
         print("Hi world");
     }
 
