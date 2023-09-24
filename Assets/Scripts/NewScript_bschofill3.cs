@@ -8,6 +8,7 @@ public class NewScript_bschofill3 : MonoBehaviour
     void Start()
     {
         print("Hello world");
+        print("Hi world");
     }
 
     // Update is called once per frame
