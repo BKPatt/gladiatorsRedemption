@@ -8,8 +8,10 @@ public class NewScript_shiyuliu : MonoBehaviour
     void Start()
     {
 
+
         print("Hello world");
         print("Hi world");
+
 
     }
 
