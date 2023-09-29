@@ -8,6 +8,7 @@ public class NewScriptBpatterson : MonoBehaviour
     void Start()
     {
         print("Hello");
+        print("Hi World");
     }
 
     // Update is called once per frame
