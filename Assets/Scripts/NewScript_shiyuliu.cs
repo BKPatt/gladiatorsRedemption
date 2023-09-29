@@ -7,7 +7,7 @@ public class NewScript_shiyuliu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        print("Hello");
+        print("Hi world");
     }
 
     // Update is called once per frame
