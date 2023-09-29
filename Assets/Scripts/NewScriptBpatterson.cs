@@ -7,6 +7,7 @@ public class NewScriptBpatterson : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        print("Hello");
         print("Hi World");
     }
 
