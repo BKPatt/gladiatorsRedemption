@@ -48,26 +48,28 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f; 
         }
 
+
         float moveZ = Input.GetAxis("Vertical");
 
         moveDirection = new Vector3(0, 0, moveZ);
         moveDirection = transform.TransformDirection(moveDirection);
+        
+
+        //moveDirection = Vector3.up * Input.GetAxis("Vertical");
 
         if (isGrounded)
         {
+            Debug.Log("1");
             if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift))
             {
-                //Walk
                 Walk();
             }
             else if (moveDirection != Vector3.zero && Input.GetKey(KeyCode.LeftShift))
             {
-                //Run
                 Run();
             }
             else if (moveDirection == Vector3.zero)
             {
-                //Idle
                 Idle();
             }
 
@@ -80,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-    
+
         controller.Move(moveDirection * Time.deltaTime);
 
         velocity.y += gravity * Time.deltaTime;
