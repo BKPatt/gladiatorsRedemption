@@ -24,14 +24,43 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Attack_Dimachaeru
+      takeName: mixamo.com
+      internalID: -203655887218126122
+      firstFrame: 0
+      lastFrame: 72
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -79,8 +108,437 @@ ModelImporter:
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
-    human: []
-    skeleton: []
+    human:
+    - boneName: basic_rig:Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftHandIndex1
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftHandIndex2
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:LeftHandIndex3
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightHandIndex1
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightHandIndex2
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:RightHandIndex3
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: basic_rig:Spine2
+      humanName: UpperChest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Attack_Dimachaeru(Clone)
+      parentName: 
+      position: {x: -0.14048573, y: -0.17825943, z: -0.05180485}
+      rotation: {x: 0.04943249, y: 0.42343357, z: -0.049954217, w: 0.9031971}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Knight_silver
+      parentName: Attack_Dimachaeru(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7069846, y: 0, z: -0, w: 0.70722896}
+      scale: {x: 100, y: 100, z: 100}
+    - name: basic_rig:Hips
+      parentName: Knight_silver
+      position: {x: -0.00005088754, y: 0.000088796616, z: 0.011900515}
+      rotation: {x: 0.5630198, y: -0.22463422, z: -0.271792, w: 0.7474472}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftUpLeg
+      parentName: basic_rig:Hips
+      position: {x: -0.001371, y: -0.000704, z: -0.000025}
+      rotation: {x: -0.436058, y: -0.0045020725, z: 0.8983109, w: 0.053578638}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftLeg
+      parentName: basic_rig:LeftUpLeg
+      position: {x: -0, y: 0.0050739995, z: 0}
+      rotation: {x: -0.31812495, y: -0.19737652, z: -0.020228298, w: 0.9270544}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftFoot
+      parentName: basic_rig:LeftLeg
+      position: {x: -0, y: 0.004069, z: 0}
+      rotation: {x: 0.76816076, y: 0.0104509145, z: -0.012468351, w: 0.6400504}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftToeBase
+      parentName: basic_rig:LeftFoot
+      position: {x: -0, y: 0.0019329999, z: 0}
+      rotation: {x: 0.3017162, y: 0.062871955, z: 0.022638222, w: 0.9510531}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftToe_End
+      parentName: basic_rig:LeftToeBase
+      position: {x: -0, y: 0.000799, z: 0}
+      rotation: {x: 0.000000043324306, y: -0.0000017513554, z: 0.0000008956092, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftToe_End_end
+      parentName: basic_rig:LeftToe_End
+      position: {x: -0, y: 0.000799, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightUpLeg
+      parentName: basic_rig:Hips
+      position: {x: 0.001371, y: -0.000704, z: -0.000046}
+      rotation: {x: 0.091740415, y: 0.01621619, z: 0.98845965, w: -0.11945031}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightLeg
+      parentName: basic_rig:RightUpLeg
+      position: {x: -0, y: 0.0050709997, z: 0}
+      rotation: {x: -0.3220954, y: 0.031485617, z: 0.023450706, w: 0.94589293}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightFoot
+      parentName: basic_rig:RightLeg
+      position: {x: -0, y: 0.0040849997, z: 0}
+      rotation: {x: 0.7780501, y: -0.04595035, z: -0.03472491, w: 0.6255563}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightToeBase
+      parentName: basic_rig:RightFoot
+      position: {x: -0, y: 0.001974, z: 0}
+      rotation: {x: 0.2799614, y: -0.091270804, z: -0.0031164035, w: 0.95565766}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightToe_End
+      parentName: basic_rig:RightToeBase
+      position: {x: -0, y: 0.000815, z: 0}
+      rotation: {x: -0.00000014978596, y: -0.0000016958413, z: 0.00000076120136, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightToe_End_end
+      parentName: basic_rig:RightToe_End
+      position: {x: -0, y: 0.000815, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:Spine
+      parentName: basic_rig:Hips
+      position: {x: -0, y: 0.001266, z: -0.000057999998}
+      rotation: {x: 0.07252617, y: -0.026137175, z: 0.01870132, w: 0.9968486}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:Spine1
+      parentName: basic_rig:Spine
+      position: {x: -0, y: 0.001478, z: 0}
+      rotation: {x: 0.05130103, y: -0.051973727, z: 0.032364447, w: 0.99680465}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:Spine2
+      parentName: basic_rig:Spine1
+      position: {x: -0, y: 0.0016889999, z: 0}
+      rotation: {x: -0.051849365, y: -0.05504676, z: 0.026806014, w: 0.9967763}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftShoulder
+      parentName: basic_rig:Spine2
+      position: {x: -0.000738, y: 0.001478, z: -0.000027}
+      rotation: {x: 0.6077449, y: -0.37938562, z: 0.5008978, w: 0.485607}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftArm
+      parentName: basic_rig:LeftShoulder
+      position: {x: -0, y: 0.001662, z: 0}
+      rotation: {x: -0.13287286, y: 0.03660219, z: 0.042521972, w: 0.98954386}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftForeArm
+      parentName: basic_rig:LeftArm
+      position: {x: -0, y: 0.002712, z: 0}
+      rotation: {x: -0.011806545, y: 0.1770032, z: -0.027904456, w: 0.9837437}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftHand
+      parentName: basic_rig:LeftForeArm
+      position: {x: -0, y: 0.002933, z: 0}
+      rotation: {x: -0.05993973, y: -0.020211406, z: -0.021544905, w: 0.99776477}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftHandIndex1
+      parentName: basic_rig:LeftHand
+      position: {x: -0, y: 0.001754, z: 0}
+      rotation: {x: -0.000294479, y: 0.009436131, z: -0.050375342, w: 0.9986858}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftHandIndex2
+      parentName: basic_rig:LeftHandIndex1
+      position: {x: -0, y: 0.000239, z: 0}
+      rotation: {x: -0.059383158, y: 0.0023502205, z: -0.08522533, w: 0.9945878}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftHandIndex3
+      parentName: basic_rig:LeftHandIndex2
+      position: {x: -0.000063, y: 0.00037300002, z: 0.000076}
+      rotation: {x: 0.070134126, y: 0.0126886945, z: -0.044264894, w: 0.99647427}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftHandIndex4
+      parentName: basic_rig:LeftHandIndex3
+      position: {x: -0.000093999995, y: 0.000303, z: 0.000036999998}
+      rotation: {x: 0.0000008726646, y: -0.0000008726646, z: 7.615435e-13, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:LeftHandIndex4_end
+      parentName: basic_rig:LeftHandIndex4
+      position: {x: -0, y: 0.00032000002, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:Neck
+      parentName: basic_rig:Spine2
+      position: {x: -0, y: 0.0019009999, z: 0}
+      rotation: {x: 0.029483544, y: -0.027243022, z: -0.00040292143, w: 0.99919385}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:Head
+      parentName: basic_rig:Neck
+      position: {x: -0, y: 0.001175, z: 0.000103}
+      rotation: {x: 0.006665496, y: -0.027245104, z: 0.00021915254, w: 0.99960655}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:HeadTop_End
+      parentName: basic_rig:Head
+      position: {x: -0, y: 0.002138, z: 0.00018799999}
+      rotation: {x: -0.03602999, y: -0.22626993, z: 0.03509295, w: 0.97276527}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:HeadTop_End_end
+      parentName: basic_rig:HeadTop_End
+      position: {x: -0, y: 0.0021459998, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightShoulder
+      parentName: basic_rig:Spine2
+      position: {x: 0.000738, y: 0.001478, z: -0.000012}
+      rotation: {x: 0.5916794, y: 0.3978454, z: -0.5036295, w: 0.48784423}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightArm
+      parentName: basic_rig:RightShoulder
+      position: {x: -0, y: 0.001662, z: 0}
+      rotation: {x: -0.05236293, y: -0.013344209, z: -0.1484787, w: 0.98743814}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightForeArm
+      parentName: basic_rig:RightArm
+      position: {x: -0, y: 0.002716, z: 0}
+      rotation: {x: -0.016026111, y: -0.12665118, z: 0.033097327, w: 0.9912655}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightHand
+      parentName: basic_rig:RightForeArm
+      position: {x: -0, y: 0.00294, z: 0}
+      rotation: {x: 0.035103057, y: 0.018984621, z: 0.30937788, w: 0.95010144}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightHandIndex1
+      parentName: basic_rig:RightHand
+      position: {x: -0, y: 0.0017319999, z: 0}
+      rotation: {x: 0.06891113, y: 0.071775615, z: 0.016427452, w: 0.9949019}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightHandIndex2
+      parentName: basic_rig:RightHandIndex1
+      position: {x: -0, y: 0.000244, z: 0}
+      rotation: {x: -0.08340182, y: 0.031024378, z: 0.0546824, w: 0.9945308}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightHandIndex3
+      parentName: basic_rig:RightHandIndex2
+      position: {x: 0.000039, y: 0.000384, z: 0.000077}
+      rotation: {x: -0.05889694, y: 0.05723614, z: 0.092354044, w: 0.9923336}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightHandIndex4
+      parentName: basic_rig:RightHandIndex3
+      position: {x: 0.000082, y: 0.00030699998, z: 0.000119}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: basic_rig:RightHandIndex4_end
+      parentName: basic_rig:RightHandIndex4
+      position: {x: -0, y: 0.000339, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mixamo:Knight_silver_001
+      parentName: Attack_Dimachaeru(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -95,9 +553,9 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 2
+  animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
