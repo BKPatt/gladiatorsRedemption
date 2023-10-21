@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     public float moveSpeed;
     public float walkSpeed;
     public float runSpeed;
+    public float proximityRadius = 5.0f;  // The radius within which to detect objects
+    public LayerMask detectableObjects;   // LayerMask to filter which objects to detect
 
     private Vector3 moveDirection;
-    private Vector3 velocity; 
+    private Vector3 velocity;
 
     [SerializeField] private bool isGrounded;
     [SerializeField] private float groundCheckDistance;
@@ -20,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight;
 
     private CharacterController controller;
-    private Animator animator; 
+    private Animator animator;
 
 
     private void Start()
@@ -32,10 +33,20 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Move();
+        CheckProximity();
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             StartCoroutine(Attack());
+        }
+    }
+
+    private void CheckProximity()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, proximityRadius, detectableObjects);
+        foreach (var hitCollider in hitColliders)
+        {
+            Debug.Log("Detected object: " + hitCollider.gameObject.name);
         }
     }
 
