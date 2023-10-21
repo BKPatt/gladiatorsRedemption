@@ -26,7 +26,7 @@ public class CharacterAI : MonoBehaviour
 
     void Update()
     {
-        if (isPaused || waypoints.Length < 3) return;
+        if (isPaused) return;
 
         Transform target = waypoints[currentWaypoint];
         Vector3 moveDirection = (target.position - transform.position).normalized;
