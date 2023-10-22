@@ -1,33 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float mouseSensitivity;
+    public float positionSmoothTime = 1f;
+    public float rotationSmoothTime = 1f;
+    public float positionMaxSpeed = 50f;
+    public float rotationMaxSpeed = 50f;
+    public Transform desiredPose;
+    public Transform target;
 
-    private Transform parent;
+    protected Vector3 currentPositionCorrectionVelocity;
+    protected Quaternion quaternionDeriv;
 
-    // Start is called before the first frame update
-    void Start()
+    protected float angle;
+
+    void LateUpdate()
     {
-        parent = transform.parent;
-        Cursor.lockState = CursorLockMode.Locked; 
+
+        if (desiredPose != null)
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, desiredPose.position, ref currentPositionCorrectionVelocity, positionSmoothTime, positionMaxSpeed, Time.deltaTime);
+
+            var targForward = desiredPose.forward;
+
+            transform.rotation = QuaternionUtil.SmoothDamp(transform.rotation,
+                Quaternion.LookRotation(targForward, Vector3.up), ref quaternionDeriv, rotationSmoothTime);
+
+        }
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        Rotate(); 
-    }
-
-    private void Rotate()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-
-        parent.Rotate(Vector3.up, mouseX);
-
-
-    }
-
 }
