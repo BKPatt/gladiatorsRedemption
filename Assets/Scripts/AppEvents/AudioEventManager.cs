@@ -24,7 +24,12 @@ public class AudioEventManager : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        EventManager.StartListening<WalkEvent, Vector3>(walkingEventListener);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.StartListening<WalkEvent, Vector3>(walkingEventListener);
     }
 
     // Update is called once per frame
@@ -36,7 +41,6 @@ public class AudioEventManager : MonoBehaviour
 
     void walkingEventHandler(Vector3 worldPos)
     {
-        //AudioSource.PlayClipAtPoint(this.explosionAudio, worldPos, 1f);
 
         if (eventSound3DPrefab)
         {

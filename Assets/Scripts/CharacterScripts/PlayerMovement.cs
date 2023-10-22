@@ -106,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
     private void Walk()
     {
         moveSpeed = walkSpeed;
+        EventManager.TriggerEvent<WalkEvent, Vector3>(new Vector3());
         animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
     }
 
