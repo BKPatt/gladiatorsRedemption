@@ -7,8 +7,9 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float walkSpeed;
     public float runSpeed;
-    public float proximityRadius = 5.0f;  // The radius within which to detect objects
-    public LayerMask detectableObjects;   // LayerMask to filter which objects to detect
+    public float turnSpeed = 700.0f;
+    public float proximityRadius = 2.0f;
+    public LayerMask detectableObjects;
 
     private Vector3 moveDirection;
     private Vector3 velocity;
@@ -17,23 +18,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float gravity;
-
     [SerializeField] private float jumpHeight;
 
     private CharacterController controller;
     private Animator animator;
-
+    public DialogManager dialogManager;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
-        animator = GetComponent<Animator>(); 
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         Move();
         CheckProximity();
+        CheckForInteractions();
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -56,21 +57,20 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded && velocity.y < 0)
         {
-            velocity.y = -2f; 
+            velocity.y = -2f;
         }
 
+        float turn = Input.GetAxis("Mouse X");
+        transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
 
+        float strafe = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        moveDirection = new Vector3(0, 0, moveZ);
+        moveDirection = new Vector3(strafe, 0, moveZ);
         moveDirection = transform.TransformDirection(moveDirection);
-        
-
-        //moveDirection = Vector3.up * Input.GetAxis("Vertical");
 
         if (isGrounded)
         {
-            Debug.Log("1");
             if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift))
             {
                 Walk();
@@ -88,17 +88,14 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Jump(); 
+                Jump();
             }
-
         }
-
 
         controller.Move(moveDirection * Time.deltaTime);
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
-
     }
 
     private void Idle()
@@ -130,7 +127,32 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(0.9f);
         animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 0);
-
     }
- 
+
+    private void CheckForInteractions()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, proximityRadius, detectableObjects);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                DoorController door = hitCollider.GetComponent<DoorController>();
+                if (door != null)
+                {
+                    door.Interact();
+                }
+
+                // Check if the GameObject has an "NPC" tag.
+                if (hitCollider.CompareTag("NPC"))
+                {
+                    // The characterName could be derived from the GameObject's name, 
+                    // or you could use a separate script to hold this data.
+                    string characterName = hitCollider.gameObject.name;
+
+                    // Trigger the dialogue based on the character name.
+                    dialogManager.StartNPCDialogue(characterName);
+                }
+            }
+        }
+    }
 }

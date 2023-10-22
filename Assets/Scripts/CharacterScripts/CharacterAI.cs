@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CharacterAI : MonoBehaviour
 {
@@ -7,44 +8,58 @@ public class CharacterAI : MonoBehaviour
     public float moveSpeed = 3.0f;
     public float pauseTime = 2.0f;
 
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float gravity;
+
     private int currentWaypoint = 0;
     private int direction = 1;
-    private CharacterController characterController;
+    private NavMeshAgent navMeshAgent;
     private Animator animator;
+    private Vector3 velocity;
     private bool isPaused = false;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        navMeshAgent.angularSpeed = 1000;
 
         if (waypoints.Length < 3)
         {
             Debug.LogError("Please assign at least 3 waypoints.");
         }
+
+        navMeshAgent.SetDestination(waypoints[currentWaypoint].position);
     }
 
     void Update()
     {
         if (isPaused) return;
 
-        Transform target = waypoints[currentWaypoint];
-        Vector3 moveDirection = (target.position - transform.position).normalized;
-
-        if (Vector3.Distance(transform.position, target.position) > 0.5f)
+        isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
+        if (isGrounded && velocity.y < 0)
         {
-            characterController.SimpleMove(moveDirection * moveSpeed);
-            animator.SetFloat("Speed", moveSpeed);
+            velocity.y = -2f;
+        }
+
+        float distanceToWaypoint = Vector3.Distance(transform.position, waypoints[currentWaypoint].position);
+
+        if (distanceToWaypoint > 1.0f)
+        {
+            animator.SetFloat("Speed", 0.3f, 0.1f, Time.deltaTime);
         }
         else
         {
-            animator.SetFloat("Speed", 0);
-            if (currentWaypoint == 0 || currentWaypoint == waypoints.Length - 1)
-            {
-                StartCoroutine(Pause());
-            }
+            animator.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+            StartCoroutine(Pause());
             UpdateWaypoint();
+            navMeshAgent.SetDestination(waypoints[currentWaypoint].position);
         }
+
+        velocity.y += gravity * Time.deltaTime;
+        navMeshAgent.Move(velocity * Time.deltaTime);
     }
 
     IEnumerator Pause()
@@ -64,7 +79,6 @@ public class CharacterAI : MonoBehaviour
         {
             direction = -1;
         }
-
         currentWaypoint += direction;
     }
 }
