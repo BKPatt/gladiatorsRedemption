@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     public DialogManager dialogManager;
 
+    private bool isFirstGlimpseTriggered = false;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -32,6 +34,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (dialogManager.isInDialogue)
+        {
+            return;
+        }
+
         Move();
         CheckProximity();
         CheckForInteractions();
@@ -132,6 +139,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckForInteractions()
     {
+        if (!isFirstGlimpseTriggered && dialogManager.currentSceneIndex == 0) {
+            isFirstGlimpseTriggered = true;
+            dialogManager.StartDialogue("FirstGlimpse");
+        }
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, proximityRadius, detectableObjects);
         foreach (var hitCollider in hitColliders)
         {
@@ -151,7 +162,7 @@ public class PlayerMovement : MonoBehaviour
                     string characterName = hitCollider.gameObject.name;
 
                     // Trigger the dialogue based on the character name.
-                    dialogManager.StartNPCDialogue(characterName);
+                    dialogManager.StartDialogue(characterName);
                 }
             }
         }
