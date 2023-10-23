@@ -17,6 +17,7 @@ public class DialogManager : MonoBehaviour
 
     void Start()
     {
+        // First chapter
         npcDialogues["FirstGlimpse"] = new List<DialogueScene>
         {
             new DialogueScene
