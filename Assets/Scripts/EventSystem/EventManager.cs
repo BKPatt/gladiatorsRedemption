@@ -54,6 +54,7 @@ using System.Collections.Generic;
 //
 //}
 
+public class ButtonClickEvent : UnityEvent<string> { }
 
 public class EventManager : MonoBehaviour
 {
