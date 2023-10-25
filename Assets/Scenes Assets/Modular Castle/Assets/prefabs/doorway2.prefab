@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 413392}
   - component: {fileID: 3351648}
   - component: {fileID: 2321202}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: gate2
-  m_TagString: Untagged
+  m_TagString: MoveScene
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 475668}
   - component: {fileID: 3390874}
   - component: {fileID: 2344114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: doorway2
-  m_TagString: Untagged
+  m_TagString: MoveScene
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,9 +179,9 @@ GameObject:
   - component: {fileID: 421518}
   - component: {fileID: 3355150}
   - component: {fileID: 2326038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: gate1
-  m_TagString: Untagged
+  m_TagString: MoveScene
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
