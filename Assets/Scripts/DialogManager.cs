@@ -171,6 +171,16 @@ public class DialogManager : MonoBehaviour
                 },
                 autoProceed = false
             },
+            new DialogueScene
+            {
+                characterName = "Draxus",
+                dialogue = "What are you doing? They are waiting for you at training upstairs!",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                },
+                autoProceed = false
+            }
         };
 
         // Initialize dialogues for Caelia
@@ -277,9 +287,9 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Hope you've made peace with your gods.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Only one of us needs to.", nextSceneName = "", nextSceneIndex = -1 },
-                    new DialogueOption { text = "Don't underestimate me.", nextSceneName = "", nextSceneIndex = -1 },
-                    new DialogueOption { text = "I promise you, I won't be an easy prey.", nextSceneName = "", nextSceneIndex = -1 }
+                    new DialogueOption { text = "Only one of us needs to.", nextSceneName = "Varro", nextSceneIndex = 0 },
+                    new DialogueOption { text = "Don't underestimate me.", nextSceneName = "Varro", nextSceneIndex = 0 },
+                    new DialogueOption { text = "I promise you, I won't be an easy prey.", nextSceneName = "Varro", nextSceneIndex = 0 }
                 },
                 autoProceed = false
             }
@@ -294,7 +304,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Fascinating... This one's different.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "Leave", nextSceneName = "Crowd", nextSceneIndex = 0}
                 },
                 autoProceed = false
             }

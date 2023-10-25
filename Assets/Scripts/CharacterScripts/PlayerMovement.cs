@@ -88,23 +88,16 @@ public class PlayerMovement : MonoBehaviour
     private void CheckProximity()
     {
         bool interactableInRange = false;
-        float draxusRange = 4.0f;
+        float draxusRange = 4.0f; // Draxus-specific range
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, proximityRadius, detectableObjects);
+
+        // Check for Draxus separately, not in the loop
+        CheckForDraxus(draxusRange);
 
         foreach (var hitCollider in hitColliders)
         {
             Debug.Log($"PlayerMovement: Detected object: {hitCollider.gameObject.name}");
-
-            if (hitCollider.CompareTag("Draxus") && !draxusDialogueStarted && Vector3.Distance(transform.position, hitCollider.transform.position) <= draxusRange)
-            {
-                if (dialogManager.currentSceneIndex == 0)
-                {
-                    dialogManager.StartDialogue("Draxus");
-                    draxusDialogueStarted = true;
-                }
-                continue;
-            }
 
             if (hitCollider.CompareTag("NPC") || hitCollider.GetComponent<DoorwayToTrainingRoom>() != null || hitCollider.GetComponent<DoorController>() != null)
             {
@@ -127,6 +120,23 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             interactUI.transform.parent.gameObject.SetActive(false);
+        }
+    }
+
+
+    private void CheckForDraxus(float draxusRange)
+    {
+        Collider[] draxusColliders = Physics.OverlapSphere(transform.position, draxusRange, detectableObjects);
+        foreach (var hitCollider in draxusColliders)
+        {
+            if (hitCollider.CompareTag("Draxus") && !draxusDialogueStarted)
+            {
+                if (dialogManager.currentSceneIndex == 0)
+                {
+                    dialogManager.StartDialogue("Draxus");
+                    draxusDialogueStarted = true;
+                }
+            }
         }
     }
 
@@ -238,6 +248,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                Debug.Log(hitCollider);
                 DoorController door = hitCollider.GetComponent<DoorController>();
                 if (door != null)
                 {
@@ -258,6 +269,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         SceneManager.LoadScene("Cell");
                     }
+
                     return;
                 }
 
