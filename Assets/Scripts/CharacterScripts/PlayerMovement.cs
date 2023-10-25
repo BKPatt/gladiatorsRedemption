@@ -226,6 +226,11 @@ public class PlayerMovement : MonoBehaviour
                 isFirstGlimpseTriggered = true;
                 dialogManager.StartDialogue("Caelia");
             }
+            else if (currentSceneName == "Colosseum")
+            {
+                isFirstGlimpseTriggered = true;
+                dialogManager.StartDialogue("Opponent");
+            }
         }
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, proximityRadius, detectableObjects);
@@ -248,6 +253,10 @@ public class PlayerMovement : MonoBehaviour
                     else if (currentSceneName == "TrainingRoom")
                     {
                         SceneManager.LoadScene("Colosseum");
+                    }
+                    else if (currentSceneName == "Colosseum")
+                    {
+                        SceneManager.LoadScene("Cell");
                     }
                     return;
                 }

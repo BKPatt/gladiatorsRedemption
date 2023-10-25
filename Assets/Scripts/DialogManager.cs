@@ -240,7 +240,7 @@ public class DialogManager : MonoBehaviour
             new DialogueScene
             {
                 characterName = "Quintus",
-                dialogue = "Names Quintus. Survived longer in this hellhole than most. If freedom's what you seek, find me when the moon is highest.",
+                dialogue = "Names Quintus. Survived longer in this hellhole than most.",
                 options = new DialogueOption[]
                 {
                     new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
