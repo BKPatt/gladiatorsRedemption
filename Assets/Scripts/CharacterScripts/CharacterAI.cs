@@ -5,30 +5,30 @@ using UnityEngine.AI;
 public class CharacterAI : MonoBehaviour
 {
     public Transform[] waypoints;
-    public float moveSpeed = 3.0f;
+    private Transform[] originalWaypoints;
     public float pauseTime = 2.0f;
 
-    [SerializeField] private bool isGrounded;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask groundMask;
-    [SerializeField] private float gravity;
 
     private int currentWaypoint = 0;
     private int direction = 1;
     private NavMeshAgent navMeshAgent;
     private Animator animator;
-    private Vector3 velocity;
     private bool isPaused = false;
+    public bool isDialoguePaused = false;
+    public Transform playerTransform;
 
     void Start()
     {
+        originalWaypoints = waypoints;
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        navMeshAgent.angularSpeed = 1000;
 
-        if (waypoints.Length < 3)
+        if (waypoints.Length == 0)
         {
-            Debug.LogError("Please assign at least 3 waypoints.");
+            Debug.LogWarning("No waypoints assigned. Character will not move.");
+            return;
         }
 
         navMeshAgent.SetDestination(waypoints[currentWaypoint].position);
@@ -36,13 +36,27 @@ public class CharacterAI : MonoBehaviour
 
     void Update()
     {
-        if (isPaused) return;
-
-        isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
-        if (isGrounded && velocity.y < 0)
+        if (isPaused || isDialoguePaused)
         {
-            velocity.y = -2f;
+            navMeshAgent.isStopped = true;
+            animator.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
+
+            // Rotate to face the player during dialogue
+            if (isDialoguePaused && playerTransform != null)
+            {
+                FaceTarget(playerTransform);
+            }
+
+            return;
         }
+
+        if (waypoints.Length == 0)
+        {
+            Debug.LogWarning("No waypoints assigned. Character will not move.");
+            return;
+        }
+
+        navMeshAgent.isStopped = false;
 
         float distanceToWaypoint = Vector3.Distance(transform.position, waypoints[currentWaypoint].position);
 
@@ -52,25 +66,50 @@ public class CharacterAI : MonoBehaviour
         }
         else
         {
-            animator.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
             StartCoroutine(Pause());
-            UpdateWaypoint();
-            navMeshAgent.SetDestination(waypoints[currentWaypoint].position);
         }
-
-        velocity.y += gravity * Time.deltaTime;
-        navMeshAgent.Move(velocity * Time.deltaTime);
     }
 
     IEnumerator Pause()
     {
         isPaused = true;
+        navMeshAgent.isStopped = true;
+        animator.SetFloat("Speed", 0, 0.1f, Time.deltaTime);
         yield return new WaitForSeconds(pauseTime);
         isPaused = false;
+
+        if (waypoints != null && waypoints.Length > 0)
+        {
+            UpdateWaypoint();
+            navMeshAgent.SetDestination(waypoints[currentWaypoint].position);
+        }
+    }
+
+    public void SetDestination(Transform newDestination)
+    {
+        if (newDestination != null)
+        {
+            waypoints = new Transform[] { newDestination };  // Set only the new destination
+            navMeshAgent.SetDestination(newDestination.position);
+            isDialoguePaused = true;  // Pause AI movement for dialogue
+        }
+        else
+        {
+            waypoints = originalWaypoints;  // Restore original waypoints
+            UpdateWaypoint();  // Update the waypoint index
+            navMeshAgent.SetDestination(waypoints[currentWaypoint].position);
+            isDialoguePaused = false;  // Resume AI movement
+        }
     }
 
     void UpdateWaypoint()
     {
+        if (waypoints == null || waypoints.Length <= 1)
+        {
+            Debug.LogWarning("Not enough waypoints for a meaningful path.");
+            return;
+        }
+
         if (currentWaypoint == 0)
         {
             direction = 1;
@@ -80,5 +119,12 @@ public class CharacterAI : MonoBehaviour
             direction = -1;
         }
         currentWaypoint += direction;
+    }
+
+    private void FaceTarget(Transform target)
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 }
