@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.1341472, b: 0.121078566, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731716, g: 0.13414738, b: 0.121078566, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -143,6 +143,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -150,6 +157,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!143 &104730402
 CharacterController:
   m_ObjectHideFlags: 0
@@ -638,6 +646,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -645,6 +660,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!143 &303970828
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1350,7 +1366,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4ac82efee3c4d58bc6b4c8d5e7ad5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 250
+  positionSmoothTime: 1
+  rotationSmoothTime: 1
+  positionMaxSpeed: 50
+  rotationMaxSpeed: 50
+  desiredPose: {fileID: 0}
+  target: {fileID: 0}
 --- !u!81 &1073589938
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1498,6 +1519,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -1505,6 +1533,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!143 &1178152422
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1812,6 +1841,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -1819,6 +1855,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!54 &1315804091
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1878,6 +1915,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -1885,6 +1929,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!143 &1350579477
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1939,6 +1984,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -1946,6 +1998,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!143 &1361726536
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2160,6 +2213,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d012b73caba62246906034d78994c42, type: 3}
+--- !u!1 &1584023720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1584023721}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1584023721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584023720}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.475735, y: -16.301863, z: 20.543507}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1853679758}
+  m_Father: {fileID: 0}
+  m_RootOrder: 41
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1586749780 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4088042285834487447, guid: c6e18fdb4391aea449258ff63ff22645, type: 3}
@@ -2180,6 +2265,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -2187,6 +2279,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!143 &1586749782
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2405,6 +2498,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -2412,6 +2512,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!143 &1748516289
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2552,6 +2653,51 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: b6e47d46416034933bb3f71f17a7164a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5041354d97b37614a8ab75bc02da05a2, type: 3}
+--- !u!1 &1853679757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1853679758}
+  - component: {fileID: 1853679759}
+  m_Layer: 0
+  m_Name: DataPersistenceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1853679758
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853679757}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1584023721}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1853679759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853679757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0665d565efb954db299e2606ebc15e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: data.ArenaMastersQuarters.game
 --- !u!1001 &1958350939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2617,6 +2763,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -2624,6 +2777,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!143 &2014446448
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6515,6 +6669,13 @@ MonoBehaviour:
   moveSpeed: 0
   walkSpeed: 5
   runSpeed: 7
+  turnSpeed: 700
+  proximityRadius: 1.5
+  detectableObjects:
+    serializedVersion: 2
+    m_Bits: 0
+  interactUI: {fileID: 0}
+  currentInterlocutor: {fileID: 0}
   isGrounded: 1
   groundCheckDistance: 0.2
   groundMask:
@@ -6522,6 +6683,7 @@ MonoBehaviour:
     m_Bits: 64
   gravity: -9.81
   jumpHeight: 1.5
+  dialogManager: {fileID: 0}
 --- !u!1 &2116242745353694236
 GameObject:
   m_ObjectHideFlags: 0
