@@ -8,7 +8,6 @@ public class playerHealth : MonoBehaviour
     public int maxHealth = 100; // Maximum health points
     private int currentHealth;  // Current health points
     public HealthBar healthBar;
-    public int damage = 10;
 
 
     private void Start()

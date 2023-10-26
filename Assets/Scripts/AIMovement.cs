@@ -6,7 +6,8 @@ using System.Collections.Generic;
 public class AIMovement : MonoBehaviour
 {
 	[SerializeField] private bool inRange;
-	[SerializeField] private bool inAttack;
+	//[SerializeField] 
+	public bool inAttackAI;
 	public Transform player; // Reference to the player character
 	private NavMeshAgent navMeshAgent;
 	private Animator animator;
@@ -15,6 +16,7 @@ public class AIMovement : MonoBehaviour
 	private bool chase;
 	public float attackDist = 15.0f;
 	public int damage = 10;  // Damage value to apply to the player
+	public PlayerMovement playerMovement;
 
 	void Start()
 	{
@@ -22,7 +24,7 @@ public class AIMovement : MonoBehaviour
 		animator = GetComponent<Animator>();
 		isMoving = false;
 		inRange = false;
-		inAttack = false;
+		inAttackAI = false;
 		turnAgain = true;
 		chase = false;
 	}
@@ -59,7 +61,7 @@ public class AIMovement : MonoBehaviour
 		{
 			inRange = true;
 			//Debug.Log("AI ATTACK");
-			inAttack = true;
+			inAttackAI = true;
 			StartCoroutine(Attack());
 			if (turnAgain == true)
 			{
@@ -73,12 +75,14 @@ public class AIMovement : MonoBehaviour
 
 
 		animator.SetFloat("Speed", navMeshAgent.velocity.magnitude / navMeshAgent.speed);
+		//bool inAttackPlayer = playerMovement.inAttackPlayer;
+		//Debug.Log(inAttackPlayer);
 	}
 
 	private IEnumerator Attack()
 	{
 		//Debug.Log("there");
-		inAttack = true;
+		inAttackAI = true;
 		animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 1);
 		animator.SetTrigger("Attack");
 
@@ -86,25 +90,29 @@ public class AIMovement : MonoBehaviour
 		animator.SetTrigger("Idle");
 		animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 0);
 		yield return new WaitForSeconds(3.0f);
-		inAttack = false;
+		inAttackAI = false;
 
 
 	}
+
 
 	private void OnTriggerEnter(Collider other)
-	{
-		// Check if the collided object is an enemy
-		if (other.CompareTag("Player"))
-		{
-			if (inAttack)
-			{
-				playerHealth playerHealth = other.GetComponent<playerHealth>();
-				if (playerHealth != null)
-				{
-					playerHealth.TakeDamage(damage);
-					Debug.Log("Hit the player!");
-				}
-			}
-		}
-	}
+    {
+        // Check if the collided object is an enemy
+        if (other.CompareTag("PlayerAxe"))
+        {
+			bool inAttackPlayer = playerMovement.inAttackPlayer;
+			Debug.Log(inAttackPlayer);
+			
+            if (inAttackPlayer == true)
+            {
+                EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(damage);
+                    Debug.Log("Hit by player!");
+                }
+            }
+        }
+    }
 }
