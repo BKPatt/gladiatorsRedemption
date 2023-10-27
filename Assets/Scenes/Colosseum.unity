@@ -1308,8 +1308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4ac82efee3c4d58bc6b4c8d5e7ad5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionSmoothTime: 1
-  rotationSmoothTime: 1
+  positionSmoothTime: 0.5
+  rotationSmoothTime: 0.5
   positionMaxSpeed: 50
   rotationMaxSpeed: 50
   desiredPose: {fileID: 417744659}
@@ -3287,8 +3287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
-  walkSpeed: 5
-  runSpeed: 7
+  walkSpeed: 0.5
+  runSpeed: 1
   turnSpeed: 700
   proximityRadius: 2
   detectableObjects:
@@ -3354,7 +3354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d3dc86dbba8e94e85d15ed0193c5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 200
   healthBar: {fileID: 789209585}
 --- !u!65 &458663013
 BoxCollider:
@@ -3367,7 +3367,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 3, z: 3}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &462959470
 GameObject:
