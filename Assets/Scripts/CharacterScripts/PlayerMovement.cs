@@ -13,11 +13,15 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask detectableObjects;
     public GameObject interactUI;
     public GameObject currentInterlocutor;
+    public int damage = 1;
 
     private Vector3 moveDirection;
     private Vector3 velocity;
 
     [SerializeField] private bool isGrounded;
+    //[SerializeField] 
+    public bool inAttackPlayer;
+    [SerializeField] private bool inAir;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float gravity;
@@ -29,11 +33,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isFirstGlimpseTriggered = false;
     private bool draxusDialogueStarted = false;
+    public AIMovement aiMovement;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        inAttackPlayer = false;
     }
 
     private void Update()
@@ -70,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            inAttackPlayer = true;
             StartCoroutine(Attack());
         }
     }
@@ -145,6 +152,11 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
 
+        if (inAir)
+        {
+            isGrounded = false;
+        }
+        
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
@@ -159,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = new Vector3(strafe, 0, moveZ);
         moveDirection = transform.TransformDirection(moveDirection);
 
-        if (isGrounded)
+        if (true)
         {
             if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift))
             {
@@ -176,9 +188,10 @@ public class PlayerMovement : MonoBehaviour
 
             moveDirection *= moveSpeed;
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
-                Jump();
+                StartCoroutine(Jump());
+                isGrounded = false;
             }
         }
 
@@ -205,20 +218,73 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
     }
 
-    private void Jump()
+    private IEnumerator Jump()
     {
-        velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+        //Debug.Log("2");
+
+        if (isGrounded == true)
+        {
+            isGrounded = false;
+            inAir = true;
+            animator.SetLayerWeight(animator.GetLayerIndex("Jump Layer"), 1);
+            animator.SetTrigger("Jump");
+            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+
+            yield return new WaitForSeconds(2.0f);
+            isGrounded = false;
+            animator.SetTrigger("Idle");
+            animator.SetLayerWeight(animator.GetLayerIndex("Jump Layer"), 0);
+        }
+        inAir = false;
     }
 
     private IEnumerator Attack()
     {
+        inAttackPlayer = true;
         animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 1);
         animator.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(0.9f);
-
+        yield return new WaitForSeconds(1.3f);
+        animator.SetTrigger("Idle");
         animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 0);
+        inAttackPlayer = false;
     }
+
+    /*private void OnTriggerEnter(Collider other)
+    {
+        // Check if the collided object is an enemy
+        if (other.CompareTag("EnemyAxe"))
+        {
+            bool inAttackAI = aiMovement.inAttackAI;
+
+            if (inAttackAI == true)
+            {
+                playerHealth PlayerHealth = other.GetComponent<playerHealth>();
+                if (PlayerHealth != null)
+                {
+                    PlayerHealth.TakeDamage(damage);
+                    Debug.Log("Hit the player :(!");
+                }
+            }
+        }
+    }*/
+
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if (inAttackPlayer && collision.collider.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyHealth = collision.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(damage);
+                    Debug.Log("Hit an enemy!");
+                }
+            // This code runs when the sword collider collides with an enemy during the attack animation.
+            // You can add code here to apply damage or perform other actions on the enemy.
+        }
+    }*/
+
+    
 
     private void CheckForInteractions()
     {
@@ -242,6 +308,7 @@ public class PlayerMovement : MonoBehaviour
                 dialogManager.StartDialogue("Opponent");
             }
         }
+
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, proximityRadius, detectableObjects);
         foreach (var hitCollider in hitColliders)
