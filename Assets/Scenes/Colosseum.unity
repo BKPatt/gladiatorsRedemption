@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028353, g: 0.22571383, b: 0.30692253, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1758,7 +1758,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 0.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1782,12 +1782,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80ec3c1759522544abac34f017e63c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inRange: 0
-  inAttackAI: 0
   player: {fileID: 458663006}
   attackDist: 15
   damage: 10
-  playerMovement: {fileID: 458663007}
 --- !u!65 &301345190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3536,8 +3533,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0
-  walkSpeed: 5
-  runSpeed: 7
+  walkSpeed: 0.5
+  runSpeed: 1
   turnSpeed: 700
   proximityRadius: 2
   detectableObjects:
@@ -3605,6 +3602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 789209585}
+  dialogManager: {fileID: 988003874}
 --- !u!65 &458663013
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6153,7 +6151,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 154199840}
-  - {fileID: 1700634016}
   - {fileID: 997882439}
   m_Father: {fileID: 462959471}
   m_RootOrder: 2
@@ -6247,7 +6244,7 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
-  m_FillRect: {fileID: 1700634016}
+  m_FillRect: {fileID: 0}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
@@ -7677,7 +7674,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 789209584}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

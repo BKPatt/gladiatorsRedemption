@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731716, g: 0.13414738, b: 0.121078566, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -31913,7 +31913,10 @@ MonoBehaviour:
     m_Bits: 384
   interactUI: {fileID: 2074811495}
   currentInterlocutor: {fileID: 0}
+  damage: 1
   isGrounded: 1
+  inAttackPlayer: 0
+  inAir: 0
   groundCheckDistance: 0.2
   groundMask:
     serializedVersion: 2
@@ -31921,6 +31924,7 @@ MonoBehaviour:
   gravity: -9.81
   jumpHeight: 1.5
   dialogManager: {fileID: 401487289}
+  aiMovement: {fileID: 0}
 --- !u!143 &434863611
 CharacterController:
   m_ObjectHideFlags: 0
@@ -110920,7 +110924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4088042285834487447, guid: c6e18fdb4391aea449258ff63ff22645, type: 3}
       propertyPath: m_TagString
-      value: Draxus
+      value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 4088042285834487449, guid: c6e18fdb4391aea449258ff63ff22645, type: 3}
       propertyPath: m_Layer

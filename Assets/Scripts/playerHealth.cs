@@ -8,6 +8,7 @@ public class playerHealth : MonoBehaviour
     public int maxHealth = 100; // Maximum health points
     private int currentHealth;  // Current health points
     public HealthBar healthBar;
+    public DialogManager dialogManager;
 
 
     private void Start()
@@ -34,7 +35,6 @@ public class playerHealth : MonoBehaviour
 
     private void Die()
     {
-        // Handle enemy death logic, such as playing death animations or removing the enemy from the scene
-        Destroy(gameObject); // This is a simple example; you may want to customize it.
+        
     }
 }

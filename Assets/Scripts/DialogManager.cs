@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class DialogManager : MonoBehaviour
 {
+    // UI components and data structures for dialog logic
     public Text dialogText;
     public GameObject optionButtonPrefab;
     public Transform buttonPanel;
@@ -97,8 +98,20 @@ public class DialogManager : MonoBehaviour
                 },
                 autoProceed = false
             },
+
+            new DialogueScene
+            {
+                characterName = "Lucius",
+                dialogue = "Draxus has unlocked the cell, you should go to the training room upstairs to get ready for the fight.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                },
+                autoProceed = false
+            }
         };
 
+        // Initialize dialogues for Chiron
         npcDialogues["Chiron"] = new List<DialogueScene>
         {
             new DialogueScene
@@ -112,8 +125,20 @@ public class DialogManager : MonoBehaviour
                 },
                 autoProceed = true
             },
+
+            new DialogueScene
+            {
+                characterName = "Chiron",
+                dialogue = "You best get moving to training. It is your best bet to win the fight tonight.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                },
+                autoProceed = false
+            }
         };
 
+        // Initialize dialogues for Leaving Dialogue
         npcDialogues["Leave"] = new List<DialogueScene>
         {
             new DialogueScene
@@ -228,6 +253,16 @@ public class DialogManager : MonoBehaviour
                     new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
+            },
+            new DialogueScene
+            {
+                characterName = "Caelia",
+                dialogue = "When you are done with training, you can proceed out the doors to the colosseum for the fight. Good luck tonight.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                },
+                autoProceed = false
             }
         };
 
@@ -279,6 +314,7 @@ public class DialogManager : MonoBehaviour
             },
         };
 
+        // Initialize dialogues for Colosseum Opponent
         npcDialogues["Opponent"] = new List<DialogueScene>
         {
             new DialogueScene
@@ -352,110 +388,94 @@ public class DialogManager : MonoBehaviour
         };
     }
 
+    // Start dialogue with a given NPC
     public void StartDialogue(string sceneName)
     {
-        Debug.Log("StartDialogue called with sceneName: " + sceneName);
-        isInDialogue = true;
-
         currentNPC = sceneName;
 
+        // Try to get the last scene shown for this NPC, default to 0 if not found
         if (!lastSceneShown.TryGetValue(sceneName, out currentSceneIndex))
         {
             currentSceneIndex = 0;
         }
 
-        dialogPanel.SetActive(true);
-
         StartScene(sceneName, currentSceneIndex);
     }
 
+    // Display the dialogue scene based on the NPC and scene index
     public void StartScene(string sceneName, int sceneIndex)
     {
-        Debug.Log("StartScene called with sceneName: " + sceneName + " and sceneIndex: " + sceneIndex);
-
-        // Update the currentNPC based on the new sceneName
         currentNPC = sceneName;
+        dialogPanel.SetActive(true);
+        isInDialogue = true;
 
+        // If the sceneIndex is -1, end the dialogue
         if (sceneIndex == -1)
         {
             EndDialogue();
             return;
         }
 
+        // Ensure the NPC and scene index are valid
         if (npcDialogues.ContainsKey(currentNPC) && sceneIndex < npcDialogues[currentNPC].Count)
         {
             currentSceneIndex = sceneIndex;
             DialogueScene scene = npcDialogues[currentNPC][sceneIndex];
-
-            Debug.Log("Options Length: " + scene.options.Length);
-
             dialogText.text = scene.characterName + ": " + scene.dialogue;
 
-            // Destroy previous buttons
+            // Remove existing buttons
             foreach (Transform child in buttonPanel)
             {
                 Destroy(child.gameObject);
             }
 
+            // No options means the dialogue is ended
             if (scene.options.Length == 0)
             {
                 EndDialogue();
                 return;
             }
 
-            float buttonHeight = 50f;
-            float initialYPosition = 0;
-            float padding = 10f;
-
+            // Create buttons for each dialogue option
             for (int i = 0; i < scene.options.Length; i++)
             {
                 GameObject optionPanel = Instantiate(optionButtonPrefab, buttonPanel);
-                optionPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, initialYPosition - i * (buttonHeight + padding));
-
-                optionPanel.transform.SetAsLastSibling();
-
                 Text optionText = optionPanel.GetComponentInChildren<Text>();
                 optionText.text = scene.options[i].text;
 
                 int nextSceneIndex = scene.options[i].nextSceneIndex;
-
                 Button optionButton = optionPanel.GetComponent<Button>();
-                optionButton.interactable = true;  // Make sure the button is interactable
-                optionButton.onClick.RemoveAllListeners();
                 optionButton.onClick.AddListener(CreateListener(scene.options[i].nextSceneName ?? currentNPC, nextSceneIndex));
-
-                Debug.Log("Button should now be set up for: " + optionText.text);
             }
 
+            // Update the last scene shown for this NPC
             lastSceneShown[currentNPC] = currentSceneIndex;
         }
         else
         {
-            Debug.LogError("Invalid scene index or NPC name. " + sceneIndex + " " + currentNPC);
+            // Invalid NPC or scene index
             EndDialogue();
         }
     }
 
-
+    // Create a UnityAction for button clicks to go to the next dialogue scene
     private UnityEngine.Events.UnityAction CreateListener(string nextSceneName, int nextSceneIndex)
     {
         return () => {
-            Debug.Log("Option button clicked. Going to next scene index: " + nextSceneIndex);
             StartScene(nextSceneName, nextSceneIndex);
         };
     }
 
-
+    // End the dialogue and reset variables
     public void EndDialogue()
     {
-        // Clear the current NPC when dialogue ends
-        Debug.Log("EndDialogue called");
         isInDialogue = false;
         dialogPanel.SetActive(false);
         currentNPC = "";
         currentSceneIndex = 0;
     }
 
+    // Move to the next dialogue for a given NPC
     public void TriggerNextDialogue(string characterName)
     {
         if (!lastDialogueIndex.ContainsKey(characterName))
@@ -468,7 +488,6 @@ public class DialogManager : MonoBehaviour
         if (npcDialogues.ContainsKey(characterName))
         {
             List<DialogueScene> dialogues = npcDialogues[characterName];
-
             if (lastDialogueIndex[characterName] < dialogues.Count)
             {
                 ShowDialog(dialogues[lastDialogueIndex[characterName]]);
@@ -476,46 +495,37 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    // Handle scene loading to initiate dialogues
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Check if the scene has an associated dialogue
         if (npcDialogues.ContainsKey(scene.name))
         {
-            // Start the dialogue automatically
             StartDialogue(scene.name);
         }
     }
 
+    // Cleanup when the object is destroyed
     void OnDestroy()
     {
-        // Unregister from scene loaded events when the object is destroyed
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    // Display the actual dialogue on the UI
     private void ShowDialog(DialogueScene dialogueScene)
     {
-        // Set the dialog panel active
         dialogPanel.SetActive(true);
-
-        // Set the main dialogue text
         dialogText.text = dialogueScene.characterName + ": " + dialogueScene.dialogue;
 
-        // Clear existing buttons
+        // Remove existing buttons
         foreach (Transform child in buttonPanel.transform)
         {
             Destroy(child.gameObject);
         }
 
-        float buttonHeight = 50f; // Set height of each button
-        float initialYPosition = 0; // Initial Y position for the first button
-        float padding = 10f; // Padding between buttons
-
-        // Create new option buttons based on the current dialogue scene
+        // Create buttons for each dialogue option
         for (int i = 0; i < dialogueScene.options.Length; i++)
         {
             GameObject button = Instantiate(optionButtonPrefab, buttonPanel);
-            button.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, initialYPosition - i * (buttonHeight + padding));
-
             button.GetComponentInChildren<Text>().text = dialogueScene.options[i].text;
 
             string nextSceneName = dialogueScene.options[i].nextSceneName ?? currentNPC;
