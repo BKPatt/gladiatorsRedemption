@@ -21,17 +21,26 @@ public class playerHealth : MonoBehaviour
     {
         // Reduce health by the specified damage
         currentHealth -= damage;
-        if (currentHealth >= 0)
+
+        // Check if healthBar is not null before calling SetHealth
+        if (healthBar != null)
         {
-            healthBar.SetHealth(currentHealth);
+            if (currentHealth >= 0)
+            {
+                healthBar.SetHealth(currentHealth);
+            }
         }
-        //Debug.Log(currentHealth + "Damage Left");
+        else
+        {
+            Debug.LogError("healthBar is not initialized");
+        }
 
         if (currentHealth <= 0)
         {
             Die(); // If health is zero or less, the hero dies
         }
     }
+
 
     private void Die()
     {

@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float walkSpeed;
     public float runSpeed;
-    public float turnSpeed = 700.0f;
+    public float turnSpeed = 100.00f;
     public float proximityRadius = 1.5f;
     public LayerMask detectableObjects;
     public GameObject interactUI;
@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         // Initialize components
+        Cursor.lockState = CursorLockMode.Locked;
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         inAttackPlayer = false;
@@ -54,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         if (dialogManager.isInDialogue)
         {
             Idle();
+            Cursor.lockState = CursorLockMode.None;
             FaceInterlocutor(GameObject.Find(dialogManager.currentNPC));
             interactUI.SetActive(false);
             interactUI.transform.parent.gameObject.SetActive(false);
@@ -85,6 +87,9 @@ public class PlayerMovement : MonoBehaviour
             }
 
             return;
+        } else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         // Normal gameplay logic

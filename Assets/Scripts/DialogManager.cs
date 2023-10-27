@@ -416,6 +416,10 @@ public class DialogManager : MonoBehaviour
             return;
         }
 
+        float buttonHeight = 50f;
+        float initialYPosition = 0;
+        float padding = 10f;
+
         // Ensure the NPC and scene index are valid
         if (npcDialogues.ContainsKey(currentNPC) && sceneIndex < npcDialogues[currentNPC].Count)
         {
@@ -440,11 +444,15 @@ public class DialogManager : MonoBehaviour
             for (int i = 0; i < scene.options.Length; i++)
             {
                 GameObject optionPanel = Instantiate(optionButtonPrefab, buttonPanel);
+                optionPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, initialYPosition - i * (buttonHeight + padding));
+                optionPanel.transform.SetAsLastSibling();
                 Text optionText = optionPanel.GetComponentInChildren<Text>();
                 optionText.text = scene.options[i].text;
 
                 int nextSceneIndex = scene.options[i].nextSceneIndex;
                 Button optionButton = optionPanel.GetComponent<Button>();
+                optionButton.interactable = true;
+                optionButton.onClick.RemoveAllListeners();
                 optionButton.onClick.AddListener(CreateListener(scene.options[i].nextSceneName ?? currentNPC, nextSceneIndex));
             }
 
@@ -522,11 +530,16 @@ public class DialogManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        float buttonHeight = 50f;
+        float initialYPosition = 0;
+        float padding = 10f;
+
         // Create buttons for each dialogue option
         for (int i = 0; i < dialogueScene.options.Length; i++)
         {
             GameObject button = Instantiate(optionButtonPrefab, buttonPanel);
             button.GetComponentInChildren<Text>().text = dialogueScene.options[i].text;
+            button.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, initialYPosition - i * (buttonHeight + padding));
 
             string nextSceneName = dialogueScene.options[i].nextSceneName ?? currentNPC;
             int nextSceneIndex = dialogueScene.options[i].nextSceneIndex;

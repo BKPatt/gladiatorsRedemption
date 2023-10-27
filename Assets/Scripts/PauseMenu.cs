@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
     public static bool isPaused;
+    public DialogManager dialogManager;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,7 @@ public class PauseMenu : MonoBehaviour
     }
     public void PauseGame()
     {
+        dialogManager.isInDialogue = true;
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -38,6 +40,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        dialogManager.isInDialogue = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
