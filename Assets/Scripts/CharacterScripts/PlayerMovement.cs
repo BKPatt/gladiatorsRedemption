@@ -250,7 +250,7 @@ public class PlayerMovement : MonoBehaviour
         inAttackPlayer = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         // Check if the collided object is an enemy
         if (other.CompareTag("EnemyAxe"))
@@ -267,7 +267,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     /*private void OnCollisionEnter(Collision collision)
     {
