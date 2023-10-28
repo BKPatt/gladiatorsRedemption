@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class playerHealth : MonoBehaviour
 {
@@ -44,6 +45,6 @@ public class playerHealth : MonoBehaviour
 
     private void Die()
     {
-        
+        SceneManager.LoadScene("ColosseumRespawn");
     }
 }
