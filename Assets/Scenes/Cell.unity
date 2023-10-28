@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731716, g: 0.13414738, b: 0.121078566, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -105753,12 +105753,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4ac82efee3c4d58bc6b4c8d5e7ad5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionSmoothTime: 1
-  rotationSmoothTime: 1
-  positionMaxSpeed: 50
-  rotationMaxSpeed: 50
   desiredPose: {fileID: 292426441}
   target: {fileID: 4280119743801200409}
+  dialogManager: {fileID: 0}
+  verticalSpeed: 2
+  smoothTime: 0.1
 --- !u!81 &1562335834
 AudioListener:
   m_ObjectHideFlags: 0
@@ -136501,6 +136500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 65802772}
+  dialogManager: {fileID: 401487289}
 --- !u!114 &2133965093
 MonoBehaviour:
   m_ObjectHideFlags: 0

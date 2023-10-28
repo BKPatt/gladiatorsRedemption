@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.063658744, g: 0.067073785, b: 0.06053935, a: 0.5}
+  m_IndirectSpecularColor: {r: 0.06365858, g: 0.06707369, b: 0.060539283, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -3546,12 +3546,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b4ac82efee3c4d58bc6b4c8d5e7ad5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionSmoothTime: 1
-  rotationSmoothTime: 1
-  positionMaxSpeed: 50
-  rotationMaxSpeed: 50
   desiredPose: {fileID: 918468338}
   target: {fileID: 770579420}
+  dialogManager: {fileID: 0}
+  verticalSpeed: 2
+  smoothTime: 0.1
 --- !u!81 &434412963
 AudioListener:
   m_ObjectHideFlags: 0
@@ -18928,6 +18927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 601958317}
+  dialogManager: {fileID: 914263859}
 --- !u!1 &1660857809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 124164, guid: e38067ccaff52424db35c2958d80cb11, type: 3}
@@ -20948,7 +20948,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -397.4402, y: -211.76384}
+  m_AnchoredPosition: {x: -397.4402, y: -211.76385}
   m_SizeDelta: {x: 67.599976, y: 37.251953}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1814629288
