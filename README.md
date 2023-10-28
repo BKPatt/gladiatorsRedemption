@@ -12,6 +12,7 @@ Start in the cell and talk to your cellmates, they will point you to leave the c
 Known Problem Areas: 
 1. AI is iffy and early development, so it can circle the player or have some odd behavior.
 2. Draxus is supposed to go back to his traversal after interacting with the player, but right now instead stays where the interactions starts and turns towards the player.
+3. Load/Save function is developed, but does not yet work as what data to be saved/loaded has not been determined.
 
 
 Who Did What:
@@ -25,3 +26,12 @@ Brantley:
 6. Added a rough camera controller to the player to work with PlayerMovement
 7. Added logic to move between scenes with the doors.
 Scripts added/edited: DialogManager, PlayerMovement, DialogueOption, DialogueScene, DialogueNode, DialogueEvent, DoorController, DoorSelector, CameraController, ChangeButtonTextColor, CharacterAI
+
+Seth:
+1. Designed and integrated MainMenu and Respawn Scenes, and PauseMenu canvas.
+2. Integrated all button functions for each menu.
+3. Wrote scripts associated to all menu functions.
+4. Implemented a DataPersistenceManager to support load/save functionality in game.
+5. Discovered Artlist.io as a source for license free music and SFX.
+6. Added music to all menus and scenes or engaging UX.
+Scripts added/edited: MainMenu, PauseMenu, ColosseumRespawn, playerHealth, DataPersistenceManager, FileDataHandler, IDataPersistence, GameData
