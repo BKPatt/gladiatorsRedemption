@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 1766ec6f6e6b24d3e83bae82579ec8a9
+  - enabled: 1
     path: Assets/Scenes/Cell.unity
     guid: 0dc2c60b283808749811ebafcf57af62
   - enabled: 1
@@ -14,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Colosseum.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/ColosseumRespawn.unity
+    guid: 75063f7aaed404c71a4b294491356576
   m_configObjects: {}
