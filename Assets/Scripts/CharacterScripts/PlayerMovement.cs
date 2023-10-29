@@ -220,6 +220,26 @@ public class PlayerMovement : MonoBehaviour
 
             moveDirection *= moveSpeed;
 
+            if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.A))
+            {
+                Idle();
+                StartCoroutine(Leftturn());
+            }
+
+            if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.D))
+            {
+                //Idle();
+                StartCoroutine(Rightturn());
+            }
+
+            if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
+            {
+                //Idle(); 
+                moveDirection = -moveDirection;
+                moveSpeed = walkSpeed;
+                StartCoroutine(Backward());
+            }
+
             // Handle jumping
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
@@ -254,6 +274,45 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = runSpeed;
         animator.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
     }
+
+    // Coroutine for performing backward
+    private IEnumerator Backward()
+    {
+
+        animator.SetLayerWeight(animator.GetLayerIndex("Backward Layer"), 1);
+        animator.SetTrigger("Backward");
+
+
+        yield return new WaitForSeconds(2.0f);
+        animator.SetLayerWeight(animator.GetLayerIndex("Backward Layer"), 0);
+
+    }
+
+    // Coroutine for performing leftturn & rightturn
+    private IEnumerator Leftturn()
+    {
+
+        animator.SetLayerWeight(animator.GetLayerIndex("Leftturn Layer"), 1);
+        animator.SetTrigger("Leftturn");
+
+
+        yield return new WaitForSeconds(2.0f);
+        animator.SetLayerWeight(animator.GetLayerIndex("Leftturn Layer"), 0);
+
+    }
+
+    private IEnumerator Rightturn()
+    {
+
+        animator.SetLayerWeight(animator.GetLayerIndex("Rightturn Layer"), 1);
+        animator.SetTrigger("Rightturn");
+
+
+        yield return new WaitForSeconds(2.0f);
+        animator.SetLayerWeight(animator.GetLayerIndex("Rightturn Layer"), 0);
+
+    }
+
 
     // Coroutine for performing a jump
     private IEnumerator Jump()
