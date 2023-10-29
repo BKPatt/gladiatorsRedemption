@@ -32,6 +32,8 @@ Known Problem Areas:
 3. Load/Save function is developed, but does not yet work as what data to be saved/loaded has not been determined.
 4. Looking up and down is not locked for some reason in the Training Room scene.
 5. There is no end scene yet, so after beating the NPC the NPC is just destroyed and nothing happens yet.
+6. Some scene changes have differences in lighting
+7. Player has sliding effects when moving, needs animation adjustments
 
 
 Who Did What:
@@ -71,4 +73,13 @@ Ashok:
 4. Added bear asset to the project, fours instances are present in the Play arena scene
 5. Added hotkeys setup for the scenes, hot keys added to toggle between all scenes
 5. Added audio assets and prefabs
-Scrips added/edited: HotKeyScript,AudioEventManager, EventSound3D, BGController, WalkEvent  
+Scripts added/edited: HotKeyScript,AudioEventManager, EventSound3D, BGController, WalkEvent  
+
+Cole:
+1. Added the player combat and the fight scenes in the main Colosseum arena while modifying PlayerMovement
+2. Created the AI for the Minotaur and created the AIMovement scripts
+3. Created and modified the PlayerMovent calling of the animations and focused on the attack/jump
+4. Created the UI health bars and tracking of damage done using colliders and triggers on enemy and player axe
+5. Modified CameraController script to back off on its focus on the player
+6. Also created EnemyAxe and SwordHit scripts to check if collisions occurred between weapons and player/enemy and doc health from each
+Scripts added/edited: PlayerMovement, CameraController, AIMovement, playerHealth, EnemyHealth, EnemyAxe, SwordHit
