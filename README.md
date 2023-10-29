@@ -8,6 +8,14 @@ Start Scene: MainMenu
 Instructions:
 Start in the cell and talk to your cellmates, they will point you to leave the cell. As you leave the cell and walk towards the training room upstairs, Draxus the guard will confront you and eventually tell you where to go. The cells are meant to be an area where the story progresses and dialogue happens. You will then go upstairs to the right, and interact with the big double doors to enter the training room. When starting in the training room, the player will auto enter dialogue with Caelia the trainer, if you interact with her after this dialogue she will point you to leave the training room when ready. In the future, the training room will allow the player to improve their skills outside of the colosseum and also an area for the player to interact with NPCs outside of their cell. When done, you go interact with the double doors at the top of the stairs and move onto the Colosseum scene. You will start dialogue with your opponent and go through a couple of options of hearing people talk, interacting with the crowd, etc. The player will then be traveled back to the Cell scene when defeating the enemy (or able to respawn if they lost to the opponent which will restart the Colosseum scene), where they will enter one more dialogue with Quintus before the content for now ends.
 
+Following Number keys can be used as shortcuts to toggle between scenes.
+
+| Scene  | Shortcut  |
+|:--------:| -------------:|
+| Cell| 1 |
+| Colosseum| 2 |
+| TrainingRoom| 3 |
+
 
 Known Problem Areas: 
 1. AI is iffy and early development, so it can circle the player or have some odd behavior.
@@ -44,3 +52,12 @@ Seth:
 5. Discovered Artlist.io as a source for license free music and SFX.
 6. Added music to all menus and scenes or engaging UX.
 Scripts added/edited: MainMenu, PauseMenu, ColosseumRespawn, playerHealth, DataPersistenceManager, FileDataHandler, IDataPersistence, GameData
+
+Ashok:
+1. Added sound setup to the game and added the Backgoround scrore to the scenes.
+2. Added Unity event manager setup.
+3. Added walking sound to the characters using the event manager setup
+4. Added bear asset to the project, fours instances are present in the Play arena scene
+5. Added hotkeys setup for the scenes, hot keys added to toggle between all scenes
+5. Added audio assets and prefabs
+Scrips added/edited: HotKeyScript,AudioEventManager, EventSound3D, BGController, WalkEvent  
