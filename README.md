@@ -8,6 +8,15 @@ Start Scene: MainMenu
 Instructions:
 Start in the cell and talk to your cellmates, they will point you to leave the cell. As you leave the cell and walk towards the training room upstairs, Draxus the guard will confront you and eventually tell you where to go. The cells are meant to be an area where the story progresses and dialogue happens. You will then go upstairs to the right, and interact with the big double doors to enter the training room. When starting in the training room, the player will auto enter dialogue with Caelia the trainer, if you interact with her after this dialogue she will point you to leave the training room when ready. In the future, the training room will allow the player to improve their skills outside of the colosseum and also an area for the player to interact with NPCs outside of their cell. When done, you go interact with the double doors at the top of the stairs and move onto the Colosseum scene. You will start dialogue with your opponent and go through a couple of options of hearing people talk, interacting with the crowd, etc. The player will then be traveled back to the Cell scene when defeating the enemy (or able to respawn if they lost to the opponent which will restart the Colosseum scene), where they will enter one more dialogue with Quintus before the content for now ends.
 
+Button Mappings:
+W: Forward
+A: Left
+S: Backwards (known issue about moving forward slightly after moving back)
+D: Right
+Space: Jump
+Left Click: Attack
+P: Pause/Resume
+
 Following Number keys can be used as shortcuts to toggle between scenes.
 
 | Scene  | Shortcut  |
@@ -21,6 +30,8 @@ Known Problem Areas:
 1. AI is iffy and early development, so it can circle the player or have some odd behavior.
 2. Draxus is supposed to go back to his traversal after interacting with the player, but right now instead stays where the interactions starts and turns towards the player.
 3. Load/Save function is developed, but does not yet work as what data to be saved/loaded has not been determined.
+4. Looking up and down is not locked for some reason in the Training Room scene.
+5. There is no end scene yet, so after beating the NPC the NPC is just destroyed and nothing happens yet.
 
 
 Who Did What:

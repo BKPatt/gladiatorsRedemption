@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class CameraController : MonoBehaviour
     public DialogManager dialogManager; // Reference to the DialogManager
     public float verticalSpeed = 2.0f; // Speed of vertical rotation
     private float pitch = 0.0f; // Vertical angle (pitch)
-    public float smoothTime = 0.1f;  // Time to reach the target
+    public float smoothTime = 0.4f;  // Time to reach the target
     private float velocity = 0.0f;  // Velocity used in SmoothDamp
 
     void Start()
@@ -34,7 +35,7 @@ public class CameraController : MonoBehaviour
                 pitch = Mathf.Clamp(pitch, -45f, 45f);
                 transform.localEulerAngles = new Vector3(pitch, transform.localEulerAngles.y, 0);
             }
-            else
+            else if (SceneManager.GetActiveScene().name == "Colosseum")
             {
                 // Make camera look towards NPC if in dialogue
                 GameObject npc = GameObject.Find(dialogManager.currentNPC);

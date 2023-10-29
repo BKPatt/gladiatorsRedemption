@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1519,6 +1519,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1335778059}
+  playerCanvas: {fileID: 462959470}
+  interactUI: {fileID: 1684448899}
+  dialogText: {fileID: 1966000762}
+  buttonPanel: {fileID: 1429518218}
   dialogManager: {fileID: 988003874}
 --- !u!114 &290226344
 MonoBehaviour:
@@ -3659,6 +3663,7 @@ MonoBehaviour:
     m_Bits: 384
   interactUI: {fileID: 1684448899}
   currentInterlocutor: {fileID: 0}
+  cameraPosition: {fileID: 0}
   damage: 10
   isGrounded: 1
   inAttackPlayer: 0
