@@ -66,7 +66,7 @@ public class PauseMenu : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Colosseum")
         {
-            GameObject healthBar = playerCanvas.transform.Find("Health Bar").gameObject;
+            GameObject healthBar = playerCanvas.transform.Find("Player Health Bar").gameObject;
             GameObject enemyHealthBar = playerCanvas.transform.Find("Enemy Health Bar").gameObject;
 
             healthBar.SetActive(false);
@@ -117,7 +117,7 @@ public class PauseMenu : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Colosseum")
         {
-            GameObject healthBar = playerCanvas.transform.Find("Health Bar").gameObject;
+            GameObject healthBar = playerCanvas.transform.Find("Player Health Bar").gameObject;
             GameObject enemyHealthBar = playerCanvas.transform.Find("Enemy Health Bar").gameObject;
 
             healthBar.SetActive(true);
