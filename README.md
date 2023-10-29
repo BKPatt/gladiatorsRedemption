@@ -17,6 +17,14 @@ Space: Jump
 Left Click: Attack
 P: Pause/Resume
 
+Following Number keys can be used as shortcuts to toggle between scenes.
+
+| Scene  | Shortcut  |
+|:--------:| -------------:|
+| Cell| 1 |
+| Colosseum| 2 |
+| TrainingRoom| 3 |
+
 
 Known Problem Areas: 
 1. AI is iffy and early development, so it can circle the player or have some odd behavior.
@@ -55,3 +63,12 @@ Seth:
 5. Discovered Artlist.io as a source for license free music and SFX.
 6. Added music to all menus and scenes or engaging UX.
 Scripts added/edited: MainMenu, PauseMenu, ColosseumRespawn, playerHealth, DataPersistenceManager, FileDataHandler, IDataPersistence, GameData
+
+Ashok:
+1. Added sound setup to the game and added the Backgoround scrore to the scenes.
+2. Added Unity event manager setup.
+3. Added walking sound to the characters using the event manager setup
+4. Added bear asset to the project, fours instances are present in the Play arena scene
+5. Added hotkeys setup for the scenes, hot keys added to toggle between all scenes
+5. Added audio assets and prefabs
+Scrips added/edited: HotKeyScript,AudioEventManager, EventSound3D, BGController, WalkEvent  
