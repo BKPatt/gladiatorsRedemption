@@ -27,6 +27,15 @@ Brantley:
 7. Added logic to move between scenes with the doors.
 Scripts added/edited: DialogManager, PlayerMovement, DialogueOption, DialogueScene, DialogueNode, DialogueEvent, DoorController, DoorSelector, CameraController, ChangeButtonTextColor, CharacterAI
 
+Shiyu Liu:
+1. Generated all the animations to 9 characters including idle, walk, run, backwards walk, left turn, right turn, jump and attack.
+2. Added animator with blend tree and different layers to control the characters
+3. Added rigid body, character controller to all characters
+4. Created PlayerMovement script with movement logic to move the Player
+5. Created a camera controller to the player to test player movement
+6. Cleaned up all the assets and codes with comments 
+Scripts added/edited/debugged with identifying issues: PlayerMovement, CameraController, EventManager, AIMovement, playerHealth, EnemyHealth.
+
 Seth:
 1. Designed and integrated MainMenu and Respawn Scenes, and PauseMenu canvas.
 2. Integrated all button functions for each menu.
