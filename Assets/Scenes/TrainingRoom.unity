@@ -3605,7 +3605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   desiredPose: {fileID: 918468338}
   target: {fileID: 770579420}
-  dialogManager: {fileID: 0}
+  dialogManager: {fileID: 914263859}
   verticalSpeed: 2
   smoothTime: 0.1
 --- !u!81 &434412963

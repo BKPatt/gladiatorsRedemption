@@ -30,10 +30,10 @@ Known Problem Areas:
 1. AI is iffy and early development, so it can circle the player or have some odd behavior.
 2. Draxus is supposed to go back to his traversal after interacting with the player, but right now instead stays where the interactions starts and turns towards the player.
 3. Load/Save function is developed, but does not yet work as what data to be saved/loaded has not been determined.
-4. Looking up and down is not locked for some reason in the Training Room scene.
-5. There is no end scene yet, so after beating the NPC the NPC is just destroyed and nothing happens yet.
-6. Some scene changes have differences in lighting
-7. Player has sliding effects when moving, needs animation adjustments
+4. There is no end scene yet, so after beating the NPC the NPC is just destroyed and nothing happens yet.
+5. Some scene changes have differences in lighting.
+6. Player has sliding effects when moving, needs animation adjustments.
+7. Attack animation can be odd since it resets with any slight movement.
 
 
 Who Did What:

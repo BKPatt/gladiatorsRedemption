@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1503,7 +1503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   desiredPose: {fileID: 417744659}
   target: {fileID: 458663006}
-  dialogManager: {fileID: 0}
+  dialogManager: {fileID: 988003874}
   verticalSpeed: 1.5
   smoothTime: 0.3
 --- !u!81 &279846103
@@ -1578,11 +1578,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 1335778059}
-  playerCanvas: {fileID: 0}
-  interactUI: {fileID: 0}
-  dialogText: {fileID: 0}
-  buttonPanel: {fileID: 0}
-  dialogManager: {fileID: 0}
+  playerCanvas: {fileID: 462959470}
+  interactUI: {fileID: 1684448899}
+  dialogText: {fileID: 1966000762}
+  buttonPanel: {fileID: 1429518218}
+  dialogManager: {fileID: 988003874}
 --- !u!114 &290226344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2222,7 +2222,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enemy Health
+  m_text: Player Health
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3993,7 +3993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   healthBar: {fileID: 141516962}
-  dialogManager: {fileID: 0}
+  dialogManager: {fileID: 988003874}
 --- !u!65 &458663013
 BoxCollider:
   m_ObjectHideFlags: 0
