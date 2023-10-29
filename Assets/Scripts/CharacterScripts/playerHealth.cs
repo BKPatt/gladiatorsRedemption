@@ -45,6 +45,7 @@ public class playerHealth : MonoBehaviour
 
     private void Die()
     {
+        dialogManager.isInDialogue = true;
         SceneManager.LoadScene("ColosseumRespawn");
     }
 }

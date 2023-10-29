@@ -392,6 +392,7 @@ public class DialogManager : MonoBehaviour
     public void StartDialogue(string sceneName)
     {
         currentNPC = sceneName;
+        isInDialogue = true;
 
         // Try to get the last scene shown for this NPC, default to 0 if not found
         if (!lastSceneShown.TryGetValue(sceneName, out currentSceneIndex))
