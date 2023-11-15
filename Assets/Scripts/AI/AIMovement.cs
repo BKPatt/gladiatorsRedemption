@@ -19,6 +19,7 @@ public class AIMovement : MonoBehaviour
     private bool turnAgain;
     private bool chase;
 
+    private float timePassed;
     // Initialize the component
     private void Start()
     {
@@ -32,6 +33,7 @@ public class AIMovement : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(player.position, transform.position);
+        timePassed += Time.deltaTime;
 
         if (ShouldMove(distance))
         {
@@ -61,7 +63,7 @@ public class AIMovement : MonoBehaviour
 
     private bool ShouldMove(float distance)
     {
-        return distance < attackDist || chase;
+        return (distance < attackDist || chase) && gameObject.GetComponent<NavMeshAgent>().enabled;
     }
 
     private void MoveTowardsPlayer()
@@ -75,7 +77,7 @@ public class AIMovement : MonoBehaviour
     {
         if (isMoving)
         {
-            navMeshAgent.isStopped = true;
+            // navMeshAgent.isStopped = true; // TODO check if this is needed
             isMoving = false;
             turnAgain = true;
         }
@@ -87,7 +89,13 @@ public class AIMovement : MonoBehaviour
 
     private bool ShouldAttack(float distance)
     {
-        return distance < 3.0f;
+        var isClose = distance < 3.0f;
+        if (isClose && (timePassed > 3f))
+        {
+            timePassed = 0f;
+            return true;
+        }
+        return false;
     }
 
     private void StartAttack()
@@ -107,7 +115,7 @@ public class AIMovement : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        animator.SetFloat("Speed", navMeshAgent.velocity.magnitude / navMeshAgent.speed);
+        animator.SetFloat("Speed", Mathf.Min(navMeshAgent.velocity.magnitude / navMeshAgent.speed, 0.5f));
     }
 
     private IEnumerator Attack()
@@ -121,6 +129,12 @@ public class AIMovement : MonoBehaviour
         animator.SetTrigger("Idle");
         animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 0);
         yield return new WaitForSeconds(3.0f);
+
+        gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+        yield return new WaitForSeconds(2.0f);
+
+        gameObject.GetComponent<NavMeshAgent>().enabled = true;
 
         inAttackAI = false;
     }
