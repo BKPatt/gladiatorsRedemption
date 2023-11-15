@@ -178,77 +178,81 @@ public class PlayerMovement : MonoBehaviour
         // Check if the player is grounded
         isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
 
-        // Check if in the air
-        if (inAir)
-        {
-            isGrounded = false;
-        }
-
-        // Reset vertical velocity if grounded
+        // Apply gravity
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
 
-        // Handle player rotation
+        // Handle player rotation based on mouse movement
         float turn = Input.GetAxis("Mouse X");
         transform.Rotate(0, turn * turnSpeed * Time.deltaTime, 0);
 
-        // Get movement directions
+        // Get input for movement
         float strafe = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        // Transform movement directions based on player's orientation
-        moveDirection = new Vector3(strafe, 0, moveZ);
+        // Determine if the player is moving backward
+        bool isMovingBackward = moveZ < 0;
+
+        // Convert the input into a movement direction
+        moveDirection = new Vector3(strafe, 0, Mathf.Abs(moveZ));
         moveDirection = transform.TransformDirection(moveDirection);
 
-        // Handle walking, running, and idle states
-        if (true)
+        // If moving backward, reverse the direction
+        if (isMovingBackward)
         {
-            if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift))
-            {
-                Walk();
-            }
-            else if (moveDirection != Vector3.zero && Input.GetKey(KeyCode.LeftShift))
-            {
-                Run();
-            }
-            else if (moveDirection == Vector3.zero)
-            {
-                Idle();
-            }
-
-            moveDirection *= moveSpeed;
-
-            if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.A))
-            {
-                Idle();
-                StartCoroutine(Leftturn());
-            }
-
-            if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.D))
-            {
-                //Idle();
-                StartCoroutine(Rightturn());
-            }
-
-            if (moveDirection != Vector3.zero && !Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
-            {
-                //Idle(); 
-                moveDirection = -moveDirection;
-                moveSpeed = walkSpeed;
-                StartCoroutine(Backward());
-            }
-
-            // Handle jumping
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-            {
-                StartCoroutine(Jump());
-                isGrounded = false;
-            }
+            moveDirection *= -1;
         }
 
-        // Apply the movement
+        // Handle different movement states
+        if (moveDirection != Vector3.zero)
+        {
+            if (Input.GetKey(KeyCode.LeftShift) && !isMovingBackward)
+            {
+                print("Run");
+                Run();
+            }
+            else
+            {
+                if (isMovingBackward && Input.GetKey(KeyCode.S))
+                {
+                    Backward();
+                }
+                else if (Input.GetKey(KeyCode.W))
+                {
+                    Walk();
+                }
+            }
+        }
+        else
+        {
+            Idle();
+        }
+
+        // Apply movement speed
+        moveDirection *= moveSpeed;
+
+        // Jump logic
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            LeftTurn();
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            RightTurn();
+        }
+        else
+        {
+            animator.SetFloat("Strafe", 0.0f);
+        }
+
+        // Apply movement and gravity
         controller.Move(moveDirection * Time.deltaTime);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
@@ -266,6 +270,7 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = walkSpeed;
         EventManager.TriggerEvent<WalkEvent, Vector3>(new Vector3());
         animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+        print("Walk");
     }
 
     // Set player state to running
@@ -275,42 +280,24 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
     }
 
-    // Coroutine for performing backward
-    private IEnumerator Backward()
+    private void Backward()
     {
-
-        animator.SetLayerWeight(animator.GetLayerIndex("Backward Layer"), 1);
-        animator.SetTrigger("Backward");
-
-
-        yield return new WaitForSeconds(2.0f);
-        animator.SetLayerWeight(animator.GetLayerIndex("Backward Layer"), 0);
-
+        moveSpeed = -walkSpeed;
+        EventManager.TriggerEvent<WalkEvent, Vector3>(new Vector3());
+        animator.SetFloat("Speed", -0.5f, 0.1f, Time.deltaTime);
+        print("Backwards");
     }
 
-    // Coroutine for performing leftturn & rightturn
-    private IEnumerator Leftturn()
+    // Strafing to the right
+    private void RightTurn()
     {
-
-        animator.SetLayerWeight(animator.GetLayerIndex("Leftturn Layer"), 1);
-        animator.SetTrigger("Leftturn");
-
-
-        yield return new WaitForSeconds(2.0f);
-        animator.SetLayerWeight(animator.GetLayerIndex("Leftturn Layer"), 0);
-
+        animator.SetFloat("Strafe", 1.0f);
     }
 
-    private IEnumerator Rightturn()
+    // Strafing to the left
+    private void LeftTurn()
     {
-
-        animator.SetLayerWeight(animator.GetLayerIndex("Rightturn Layer"), 1);
-        animator.SetTrigger("Rightturn");
-
-
-        yield return new WaitForSeconds(2.0f);
-        animator.SetLayerWeight(animator.GetLayerIndex("Rightturn Layer"), 0);
-
+        animator.SetFloat("Strafe", -1.0f);
     }
 
 
