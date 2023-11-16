@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - EnemyAxe
   - PlayerAxe
+  - dummy
   layers:
   - Default
   - TransparentFX

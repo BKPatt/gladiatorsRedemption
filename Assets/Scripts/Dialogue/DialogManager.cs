@@ -257,7 +257,7 @@ public class DialogManager : MonoBehaviour
             new DialogueScene
             {
                 characterName = "Caelia",
-                dialogue = "When you are done with training, you can proceed out the doors to the colosseum for the fight. Good luck tonight.",
+                dialogue = "Test your fighting skills on the dummy. When you are done with training, you can proceed out the doors to the colosseum for the fight. Good luck tonight.",
                 options = new DialogueOption[]
                 {
                     new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
