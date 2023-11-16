@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject interactUI;
     public GameObject currentInterlocutor;
     public int damage = 1;
+    private float dummyProximityRadius = 4.0f;
 
     // Private variables for internal state and logic
     private Vector3 moveDirection;
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float gravity;
     [SerializeField] private float jumpHeight;
+    [SerializeField] private GameObject dummyPanel;
 
     // Components
     private CharacterController controller;
@@ -120,9 +122,12 @@ public class PlayerMovement : MonoBehaviour
     private void CheckProximity()
     {
         bool interactableInRange = false;
+        bool dummyInRange = false;
         float draxusRange = 4.0f;  // Draxus-specific interaction range
+        float dummyProximityRadius = 4.0f; // Specific proximity radius for dummy objects
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, proximityRadius, detectableObjects);
+        Collider[] dummyHitColliders = Physics.OverlapSphere(transform.position, dummyProximityRadius, detectableObjects);
 
         // Special check for Draxus character
         CheckForDraxus(draxusRange);
@@ -137,9 +142,19 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        // Check for dummy objects in proximity
+        foreach (var hitCollider in dummyHitColliders)
+        {
+            if (hitCollider.CompareTag("dummy"))
+            {
+                dummyInRange = true;
+                break;
+            }
+        }
+
         // Set interaction UI based on whether an interactable object is in range
         interactUI.SetActive(interactableInRange);
-        interactUI.transform.parent.gameObject.SetActive(true);
+        interactUI.transform.parent.gameObject.SetActive(interactableInRange);
         if (interactableInRange)
         {
             Text uiText = interactUI.GetComponentInChildren<Text>(true);
@@ -153,7 +168,11 @@ public class PlayerMovement : MonoBehaviour
         {
             interactUI.transform.parent.gameObject.SetActive(false);
         }
+
+        // Show or hide the dummy panel based on proximity
+        dummyPanel.SetActive(dummyInRange);
     }
+
 
     // Special proximity check for the Draxus character
     private void CheckForDraxus(float draxusRange)
@@ -175,6 +194,8 @@ public class PlayerMovement : MonoBehaviour
     // Handle all types of player movement
     private void Move()
     {
+        if (inAir || inAttackPlayer) return;
+
         // Check if the player is grounded
         isGrounded = Physics.CheckSphere(transform.position, groundCheckDistance, groundMask);
 
@@ -210,7 +231,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift) && !isMovingBackward)
             {
-                print("Run");
                 Run();
             }
             else
@@ -270,7 +290,6 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = walkSpeed;
         EventManager.TriggerEvent<WalkEvent, Vector3>(new Vector3());
         animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
-        print("Walk");
     }
 
     // Set player state to running
@@ -285,7 +304,6 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = -walkSpeed;
         EventManager.TriggerEvent<WalkEvent, Vector3>(new Vector3());
         animator.SetFloat("Speed", -0.5f, 0.1f, Time.deltaTime);
-        print("Backwards");
     }
 
     // Strafing to the right
@@ -313,11 +331,11 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
 
             yield return new WaitForSeconds(2.0f);
-            isGrounded = false;
+            isGrounded = true;
+            inAir = false;  // Set inAir to false once the jump is completed
             animator.SetTrigger("Idle");
             animator.SetLayerWeight(animator.GetLayerIndex("Jump Layer"), 0);
         }
-        inAir = false;
     }
 
     // Coroutine for performing an attack
@@ -327,7 +345,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 1);
         animator.SetTrigger("Attack");
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(2.0f);
         animator.SetTrigger("Idle");
         animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 0);
         inAttackPlayer = false;
