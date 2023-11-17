@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     public GameObject interactUI;
     public GameObject currentInterlocutor;
     public int damage = 1;
-    private float dummyProximityRadius = 4.0f;
 
     // Private variables for internal state and logic
     private Vector3 moveDirection;
@@ -28,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float gravity;
     [SerializeField] private float jumpHeight;
-    [SerializeField] private GameObject dummyPanel;
+    [SerializeField] private GameObject dummyPanel = null;
 
     // Components
     private CharacterController controller;
@@ -147,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (hitCollider.CompareTag("dummy"))
             {
+                print("Dummy");
                 dummyInRange = true;
                 break;
             }
@@ -170,7 +170,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Show or hide the dummy panel based on proximity
-        dummyPanel.SetActive(dummyInRange);
+        if (dummyPanel != null)
+        {
+            dummyPanel.SetActive(dummyInRange);
+        }
+
     }
 
 
