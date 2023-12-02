@@ -33,6 +33,6 @@ public class EnemyHealth : MonoBehaviour
     {
         // Handle enemy death logic, such as playing death animations or removing the enemy from the scene
         Destroy(gameObject);
-        dialogManager.StartScene("Quintus", 0);
+        SceneManager.LoadScene("ColosseumGameOver");
     }
 }
