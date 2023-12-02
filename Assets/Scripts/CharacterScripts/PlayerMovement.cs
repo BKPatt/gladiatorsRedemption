@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public GameObject interactUI;
     public GameObject currentInterlocutor;
     public int damage = 1;
+    public GameObject battleAxe = null;
+    public GameObject halberd = null;
+    public GameObject sword = null;
 
     // Private variables for internal state and logic
     private Vector3 moveDirection;
@@ -37,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     // Booleans to check certain events
     private bool isFirstGlimpseTriggered = false;
     private bool draxusDialogueStarted = false;
-    public AIMovement aiMovement;
+    public AIMovement aiMovement = null;
 
     // Initialization
     private void Start()
@@ -134,7 +137,7 @@ public class PlayerMovement : MonoBehaviour
         // Check for other interactable objects or NPCs
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("NPC") || hitCollider.GetComponent<DoorwayToTrainingRoom>() != null || hitCollider.GetComponent<DoorController>() != null)
+            if (hitCollider.CompareTag("NPC") || (hitCollider.GetComponent<DoorwayToTrainingRoom>() != null && dialogManager.playerClan != "") || hitCollider.GetComponent<DoorController>() != null)
             {
                 interactableInRange = true;
                 break;
@@ -146,7 +149,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (hitCollider.CompareTag("dummy"))
             {
-                print("Dummy");
                 dummyInRange = true;
                 break;
             }
@@ -376,7 +378,7 @@ public class PlayerMovement : MonoBehaviour
             else if (currentSceneName == "Colosseum")
             {
                 isFirstGlimpseTriggered = true;
-                dialogManager.StartDialogue("Opponent");
+                dialogManager.StartScene("Decimus", 1);
             }
         }
 
@@ -399,7 +401,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         SceneManager.LoadScene("TrainingRoom");
                     }
-                    else if (currentSceneName == "TrainingRoom")
+                    else if (currentSceneName == "TrainingRoom" && dialogManager.playerClan != "")
                     {
                         SceneManager.LoadScene("Colosseum");
                     }
@@ -430,6 +432,22 @@ public class PlayerMovement : MonoBehaviour
                     else if (characterName == "Caelia")
                     {
                         dialogManager.StartScene("Caelia", 4);
+                    }
+                    else if (characterName == "Decimus")
+                    {
+                        dialogManager.StartScene("Decimus", 0);
+                    }
+                    else if (characterName == "Minotaur Leader")
+                    {
+                        dialogManager.StartScene("Minotaur Leader", 0);
+                    }
+                    else if (characterName == "Dimachaeru Leader")
+                    {
+                        dialogManager.StartScene("Dimachaeru Leader", 0);
+                    }
+                    else if (characterName == "Sagittarii Leader")
+                    {
+                        dialogManager.StartScene("Sagittarii Leader", 0);
                     }
                 }
             }
