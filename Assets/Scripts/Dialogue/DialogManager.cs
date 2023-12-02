@@ -18,9 +18,17 @@ public class DialogManager : MonoBehaviour
     public Button[] optionButtons;
     private readonly Dictionary<string, int> lastSceneShown = new();
     public bool isInDialogue = false;
+    public string playerClan = "";
+    public GameObject player;
+    public GameObject dummy = null;
 
     void Start()
     {
+        if (dummy != null)
+        {
+            dummy.SetActive(false);
+        }
+
         SceneManager.sceneLoaded += OnSceneLoaded;
 
         // First chapter
@@ -32,8 +40,8 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Hello?! Can anyone hear me?",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "I demand an explanation!", nextSceneName = "Lucius", nextSceneIndex = 0 },
-                    new DialogueOption { text = "I need to find a way out, quickly.", nextSceneName = "Lucius", nextSceneIndex = 0 }
+                    new DialogueOption { text = "<b>Option 1</b>: I demand an explanation!", nextSceneName = "Lucius", nextSceneIndex = 0 },
+                    new DialogueOption { text = "<b>Option 2</b>: I need to find a way out, quickly.", nextSceneName = "Lucius", nextSceneIndex = 0 }
                 },
                 autoProceed = true
             }
@@ -48,7 +56,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Another lamb for the slaughter. They never stop, do they?",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "This is a mistake. I shouldn't be here.", nextSceneName = "Chiron", nextSceneIndex = 0 }
+                    new DialogueOption { text = "<b>Option 1</b>: This is a mistake. I shouldn't be here.", nextSceneName = "Chiron", nextSceneIndex = 0 }
                 },
                 autoProceed = true
             },
@@ -59,9 +67,9 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Ah, the world's spinning for you too, huh? Welcome to the pit.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "I need to know, who are you? And why have I been thrown in here?", nextSceneName = "Lucius", nextSceneIndex = 2 },
-                    new DialogueOption { text = "Every corner of this place feels... dark.", nextSceneName = "Lucius", nextSceneIndex = 3 },
-                    new DialogueOption { text = "I demand answers. Now.", nextSceneName = "Lucius", nextSceneIndex = 4 }
+                    new DialogueOption { text = "<b>Option 1</b>: I need to know, who are you? And why have I been thrown in here?", nextSceneName = "Lucius", nextSceneIndex = 2 },
+                    new DialogueOption { text = "<b>Option 2</b>: Every corner of this place feels... dark.", nextSceneName = "Lucius", nextSceneIndex = 3 },
+                    new DialogueOption { text = "<b>Option 3</b>: I demand answers. Now.", nextSceneName = "Lucius", nextSceneIndex = 4 }
                 },
                 autoProceed = true
             },
@@ -72,7 +80,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Name's Lucius. As for your arrival, well, that's the million-gold question. This colosseum, it's more than just bloody games. There are puppeteers behind the scenes.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
@@ -83,7 +91,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Centuries of pain and betrayal leave their mark. Trust your instincts. And more importantly, watch your back.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
@@ -94,7 +102,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Calm yourself. All in due time. For now, your primary concern? Earning the respect of the clans.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
@@ -105,7 +113,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Draxus has unlocked the cell, you should go to the training room upstairs to get ready for the fight.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             }
@@ -120,8 +128,8 @@ public class DialogManager : MonoBehaviour
                 dialogue = "You must be new here. Big fight tomorrow. They like to toss in new souls to stir the pot.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "I don't remember how I got here.", nextSceneName = "Lucius", nextSceneIndex = 1 },
-                    new DialogueOption { text = "Fight? What are you talking about?", nextSceneName = "Lucius", nextSceneIndex = 1 }
+                    new DialogueOption { text = "<b>Option 1</b>: I don't remember how I got here.", nextSceneName = "Lucius", nextSceneIndex = 1 },
+                    new DialogueOption { text = "<b>Option 2</b>: Fight? What are you talking about?", nextSceneName = "Lucius", nextSceneIndex = 1 }
                 },
                 autoProceed = true
             },
@@ -132,7 +140,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "You best get moving to training. It is your best bet to win the fight tonight.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             }
@@ -159,8 +167,8 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Well, if it isn't the runaway. Thought you could elude your past?",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "You have the wrong person! I've committed no crimes!", nextSceneName = "Draxus", nextSceneIndex = 1 },
-                    new DialogueOption { text = "Laugh now, but one day, I'll be the one laughing.", nextSceneName = "Draxus", nextSceneIndex = 1 }
+                    new DialogueOption { text = "<b>Option 1</b>: You have the wrong person! I've committed no crimes!", nextSceneName = "Draxus", nextSceneIndex = 1 },
+                    new DialogueOption { text = "<b>Option 2</b>: Laugh now, but one day, I'll be the one laughing.", nextSceneName = "Draxus", nextSceneIndex = 1 }
                 },
                 autoProceed = false
             },
@@ -170,8 +178,8 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Heard that one before, don’t get too comfortable. You’ll need to walk towards the training grounds. It is upstairs to the right. A bit of sharpening before the big show tonight.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Training? So, you do want me to stand a chance.", nextSceneName = "Draxus", nextSceneIndex = 2 },
-                    new DialogueOption { text = "I won’t be part of your twisted games.", nextSceneName = "Draxus", nextSceneIndex = 3 }
+                    new DialogueOption { text = "<b>Option 1</b>: Training? So, you do want me to stand a chance.", nextSceneName = "Draxus", nextSceneIndex = 2 },
+                    new DialogueOption { text = "<b>Option 2</b>: I won’t be part of your twisted games.", nextSceneName = "Draxus", nextSceneIndex = 3 }
                 },
                 autoProceed = false
             },
@@ -182,7 +190,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "It’s not about you. It’s about the show. A swift death is a boring death.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
@@ -192,7 +200,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "You don’t have a choice. Now, get moving!",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
@@ -202,7 +210,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "What are you doing? They are waiting for you at training upstairs!",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             }
@@ -217,9 +225,9 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Fall in line! This isn't a vacation. The sands of the arena are thirsty. And you are here to quench that thirst.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Challenge accepted. I won't disappoint.", nextSceneName = "Caelia", nextSceneIndex = 1 },
-                    new DialogueOption { text = "Who do you think you are, ordering me around?", nextSceneName = "Caelia", nextSceneIndex = 2 },
-                    new DialogueOption { text = "I’ve been wrongfully accused! I have no business here!", nextSceneName = "Caelia", nextSceneIndex = 3 }
+                    new DialogueOption { text = "<b>Option 1</b>: Challenge accepted. I won't disappoint.", nextSceneName = "Caelia", nextSceneIndex = 1 },
+                    new DialogueOption { text = "<b>Option 2</b>: Who do you think you are, ordering me around?", nextSceneName = "Caelia", nextSceneIndex = 2 },
+                    new DialogueOption { text = "<b>Option 3</b>: I’ve been wrongfully accused! I have no business here!", nextSceneName = "Caelia", nextSceneIndex = 3 }
                 },
                 autoProceed = false
             },
@@ -227,40 +235,40 @@ public class DialogManager : MonoBehaviour
             new DialogueScene
             {
                 characterName = "Caelia",
-                dialogue = "Brave words. But bravery alone doesn't cut it. Let's see if your blade is as sharp as your tongue.",
+                dialogue = "Brave words. But bravery alone doesn't cut it. Let's see if your blade is as sharp as your tongue. Talk to the clan leaders and choose your clan and fighting style.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
             new DialogueScene
             {
                 characterName = "Caelia",
-                dialogue = "I am Caelia, keeper of discipline. My word is bond here. Challenge it, and you'll taste the sand before you know it.",
+                dialogue = "I am Caelia, keeper of discipline. My word is bond here. Challenge it, and you'll taste the sand before you know it. Talk to the clan leaders and choose your clan and fighting style.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
             new DialogueScene
             {
                 characterName = "Caelia",
-                dialogue = "Neither did most. But fate's twisted, isn't it? Make it count.",
+                dialogue = "Neither did most. But fate's twisted, isn't it? Make it count. Talk to the clan leaders and choose your clan and fighting style.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
             new DialogueScene
             {
                 characterName = "Caelia",
-                dialogue = "Test your fighting skills on the dummy. When you are done with training, you can proceed out the doors to the colosseum for the fight. Good luck tonight.",
+                dialogue = "Test your fighting skills on the dummy after choosing a clan and talk to your opponent at the top of the stairs if you'd like. When you are done with training, you can proceed out the doors to the colosseum for the fight. Good luck tonight.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             }
@@ -275,9 +283,9 @@ public class DialogManager : MonoBehaviour
                 dialogue = "A commendable display for a novice.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "And you are?", nextSceneName = "Quintus", nextSceneIndex = 1 },
-                    new DialogueOption { text = "Just a bit of prior experience coming into play.", nextSceneName = "Quintus", nextSceneIndex = 2 },
-                    new DialogueOption { text = "I could use some friends in this place. Are you trustworthy?", nextSceneName = "Quintus", nextSceneIndex = 3 }
+                    new DialogueOption { text = "<b>Option 1</b>: And you are?", nextSceneName = "Quintus", nextSceneIndex = 1 },
+                    new DialogueOption { text = "<b>Option 2</b>: Just a bit of prior experience coming into play.", nextSceneName = "Quintus", nextSceneIndex = 2 },
+                    new DialogueOption { text = "<b>Option 3</b>: I could use some friends in this place. Are you trustworthy?", nextSceneName = "Quintus", nextSceneIndex = 3 }
                 },
                 autoProceed = false
             },
@@ -288,7 +296,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Names Quintus. Survived longer in this hellhole than most.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
@@ -298,7 +306,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Skill can get you so far, experience is what keeps you alive. Stay sharp, and the colosseum might just teach you a thing or two.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
@@ -308,24 +316,143 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Trust? A luxury few can afford. But prove yourself to the clans, and perhaps we can discuss alliances and trust.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
         };
 
         // Initialize dialogues for Colosseum Opponent
-        npcDialogues["Opponent"] = new List<DialogueScene>
+        npcDialogues["Decimus"] = new List<DialogueScene>
         {
             new DialogueScene
             {
-                characterName = "Opponent",
+                characterName = "Decimus",
+                dialogue = "Are you ready for the big fight? Only one of us is making it out of there.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Only one of us needs to. (Decimus gets angry)", nextSceneName = "Leave", nextSceneIndex = 0 },
+                    new DialogueOption { text = "<b>Option 2</b>: I just want an honorable fight. (Decimus is less angry)", nextSceneName = "Leave", nextSceneIndex = 0 }
+                },
+                autoProceed = false
+            },
+            new DialogueScene
+            {
+                characterName = "Decimus",
                 dialogue = "Hope you've made peace with your gods.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Only one of us needs to.", nextSceneName = "Varro", nextSceneIndex = 0 },
-                    new DialogueOption { text = "Don't underestimate me.", nextSceneName = "Varro", nextSceneIndex = 0 },
-                    new DialogueOption { text = "I promise you, I won't be an easy prey.", nextSceneName = "Varro", nextSceneIndex = 0 }
+                    new DialogueOption { text = "<b>Option 1</b>: Only one of us needs to.", nextSceneName = "Varro", nextSceneIndex = 0 },
+                    new DialogueOption { text = "<b>Option 2</b>: Don't underestimate me.", nextSceneName = "Varro", nextSceneIndex = 0 },
+                    new DialogueOption { text = "<b>Option 3</b>: I promise you, I won't be an easy prey.", nextSceneName = "Varro", nextSceneIndex = 0 }
+                },
+                autoProceed = false
+            }
+        };
+
+        npcDialogues["Minotaur Leader"] = new List<DialogueScene>
+        {
+            new DialogueScene
+            {
+                characterName = "Minotaur Leader",
+                dialogue = "I am Titus Stormbringer the leader of the Minotaur clan. We fight with battle axes to survive. We could use a newbie if you are interested.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Count me in.", nextSceneName = "Minotaur Leader", nextSceneIndex = 1 },
+                    new DialogueOption { text = "<b>Option 2</b>: Let me think about it.", nextSceneName = "Leave", nextSceneIndex = 0 },
+                    new DialogueOption { text = "<b>Option 3</b>: No thanks.", nextSceneName = "Leave", nextSceneIndex = 0 }
+                },
+                autoProceed = false
+            },
+            new DialogueScene
+            {
+                characterName = "Minotaur Leader",
+                dialogue = "Great decision! Go test your new weapon on the dummy",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                },
+                autoProceed = false
+            },
+            new DialogueScene
+            {
+                characterName = "Minotaur Leader",
+                dialogue = "Can't say I agree with your decision in clans.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                },
+                autoProceed = false
+            }
+        };
+
+        npcDialogues["Dimachaeru Leader"] = new List<DialogueScene>
+        {
+            new DialogueScene
+            {
+                characterName = "Dimachaeru Leader",
+                dialogue = "I am Titus Stormbringer the leader of the Dimachaeru clan. We fight with halberds for each other. You are always welcome here.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Count me in.", nextSceneName = "Dimachaeru Leader", nextSceneIndex = 1 },
+                    new DialogueOption { text = "<b>Option 2</b>: Let me think about it.", nextSceneName = "Leave", nextSceneIndex = 0 },
+                    new DialogueOption { text = "<b>Option 3</b>: No thanks.", nextSceneName = "Leave", nextSceneIndex = 0 }
+                },
+                autoProceed = false
+            },
+            new DialogueScene
+            {
+                characterName = "Dimachaeru Leader",
+                dialogue = "Great decision! Go test your new weapon on the dummy",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                },
+                autoProceed = false
+            },
+            new DialogueScene
+            {
+                characterName = "Dimachaeru Leader",
+                dialogue = "I hope your clan choice works out for you.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                },
+                autoProceed = false
+            }
+        };
+
+        npcDialogues["Sagittarii Leader"] = new List<DialogueScene>
+        {
+            new DialogueScene
+            {
+                characterName = "Sagittarii Leader",
+                dialogue = "I am Sagittarius Arrowsong the leader of the Sagittarii clan. We fight with swords against the other clans. We can always use fresh meat.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Count me in.", nextSceneName = "Sagittarii Leader", nextSceneIndex = 1 },
+                    new DialogueOption { text = "<b>Option 2</b>: Let me think about it.", nextSceneName = "Leave", nextSceneIndex = 0 },
+                    new DialogueOption { text = "<b>Option 3</b>: No thanks.", nextSceneName = "Leave", nextSceneIndex = 0 }
+                },
+                autoProceed = false
+            },
+            new DialogueScene
+            {
+                characterName = "Sagittarii Leader",
+                dialogue = "Great decision! Go test your new weapon on the dummy",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                },
+                autoProceed = false
+            },
+            new DialogueScene
+            {
+                characterName = "Sagittarii Leader",
+                dialogue = "You made the wrong decision, newbie. We will see blood in the arena.",
+                options = new DialogueOption[]
+                {
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             }
@@ -340,7 +467,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Fascinating... This one's different.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Crowd", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Crowd", nextSceneIndex = 0}
                 },
                 autoProceed = false
             }
@@ -355,8 +482,8 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Blood and glory! Blood and glory!",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Then let the sands be soaked!", nextSceneName = "", nextSceneIndex = -1 },
-                    new DialogueOption { text = "I am no slave to your whims.", nextSceneName = "", nextSceneIndex = -1 }
+                    new DialogueOption { text = "<b>Option 1</b>: Then let the sands be soaked! (Gain extra health and the crowd's addoration)", nextSceneName = "", nextSceneIndex = -1 },
+                    new DialogueOption { text = "<b>Option 2</b>: I am no slave to your whims. (Health stays the same and the crowd seems bored)", nextSceneName = "", nextSceneIndex = -1 }
                 },
                 autoProceed = false
             }
@@ -371,7 +498,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "After a remarkable victory, gifts rain down: gold, trinkets, and weapons, reflecting the crowd's favor.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             },
@@ -381,7 +508,7 @@ public class DialogManager : MonoBehaviour
                 dialogue = "Ferocious beasts prowl and roar, hunger evident in their eyes. They are released as the crowd becomes disappointed. Gladiators huddle, uncertainty etched on their faces.",
                 options = new DialogueOption[]
                 {
-                    new DialogueOption { text = "Leave", nextSceneName = "Leave", nextSceneIndex = 0}
+                    new DialogueOption { text = "<b>Option 1</b>: Leave", nextSceneName = "Leave", nextSceneIndex = 0}
                 },
                 autoProceed = false
             }
@@ -415,6 +542,12 @@ public class DialogManager : MonoBehaviour
         {
             EndDialogue();
             return;
+        }
+
+        // Check if the player is already in a clan
+        if (playerClan != "" && (sceneName == "Minotaur Leader" || sceneName == "Dimachaeru Leader" || sceneName == "Sagittarii Leader") && sceneIndex == 0)
+        {
+            sceneIndex = 2;
         }
 
         float buttonHeight = 50f;
@@ -471,6 +604,12 @@ public class DialogManager : MonoBehaviour
     private UnityEngine.Events.UnityAction CreateListener(string nextSceneName, int nextSceneIndex)
     {
         return () => {
+            if (nextSceneName == "Minotaur Leader" || nextSceneName == "Dimachaeru Leader" || nextSceneName == "Sagittarii Leader")
+            {
+                playerClan = nextSceneName.Split(' ')[0];
+                GivePlayerWeapon(playerClan, player);
+            }
+
             StartScene(nextSceneName, nextSceneIndex);
         };
     }
@@ -519,6 +658,38 @@ public class DialogManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void GivePlayerWeapon(string clanName, GameObject player)
+    {
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        if (playerMovement != null)
+        {
+            // Deactivate all weapons initially
+            playerMovement.battleAxe.SetActive(false);
+            playerMovement.halberd.SetActive(false);
+            playerMovement.sword.SetActive(false);
+
+            // Activate the weapon based on the clan
+            switch (clanName)
+            {
+                case "Minotaur":
+                    playerMovement.battleAxe.SetActive(true);
+                    dummy.SetActive(true);
+                    break;
+                case "Dimachaeru":
+                    playerMovement.halberd.SetActive(true);
+                    dummy.SetActive(true);
+                    break;
+                case "Sagittarii":
+                    playerMovement.sword.SetActive(true);
+                    dummy.SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+
     // Display the actual dialogue on the UI
     private void ShowDialog(DialogueScene dialogueScene)
     {
@@ -541,6 +712,12 @@ public class DialogManager : MonoBehaviour
             GameObject button = Instantiate(optionButtonPrefab, buttonPanel);
             button.GetComponentInChildren<Text>().text = dialogueScene.options[i].text;
             button.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, initialYPosition - i * (buttonHeight + padding));
+
+            RectTransform rectTransform = button.GetComponent<RectTransform>();
+            rectTransform.anchorMin = new Vector2(0, 1); // Left top
+            rectTransform.anchorMax = new Vector2(0, 1); // Left top
+            rectTransform.pivot = new Vector2(0, 1); // Left top
+            rectTransform.anchoredPosition = new Vector2(0, initialYPosition - i * (buttonHeight + padding));
 
             string nextSceneName = dialogueScene.options[i].nextSceneName ?? currentNPC;
             int nextSceneIndex = dialogueScene.options[i].nextSceneIndex;

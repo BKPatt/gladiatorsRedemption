@@ -31494,6 +31494,9 @@ MonoBehaviour:
   dialogPanel: {fileID: 866590850}
   optionButtons: []
   isInDialogue: 0
+  playerClan: 
+  player: {fileID: 3471671226757830051}
+  dummy: {fileID: 0}
 --- !u!4 &401487290
 Transform:
   m_ObjectHideFlags: 0
@@ -32039,6 +32042,9 @@ MonoBehaviour:
   interactUI: {fileID: 2074811495}
   currentInterlocutor: {fileID: 0}
   damage: 1
+  battleAxe: {fileID: 0}
+  halberd: {fileID: 0}
+  sword: {fileID: 0}
   isGrounded: 1
   inAttackPlayer: 0
   inAir: 0
@@ -32048,6 +32054,7 @@ MonoBehaviour:
     m_Bits: 1
   gravity: -9.81
   jumpHeight: 1.5
+  dummyPanel: {fileID: 0}
   dialogManager: {fileID: 401487289}
   aiMovement: {fileID: 0}
 --- !u!143 &434863611
