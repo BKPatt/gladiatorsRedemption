@@ -23,6 +23,14 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDirection;
     private Vector3 velocity;
 
+    private float aLastTapTime = 0f;
+    private int aTapCount = 0;
+    private float dLastTapTime = 0f;
+    private int dTapCount = 0;
+    private float sLastTapTime = 0f;
+    private int sTapCount = 0;
+    private float doubleTapThreshold = 1.25f;
+
     [SerializeField] private bool isGrounded;
     public bool inAttackPlayer;
     [SerializeField] private bool inAir;
@@ -106,6 +114,67 @@ public class PlayerMovement : MonoBehaviour
         {
             inAttackPlayer = true;
             StartCoroutine(Attack());
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if ((Time.time - aLastTapTime) < doubleTapThreshold)
+            {
+                aTapCount++;
+
+                if (aTapCount == 2)
+                {
+                    animator.SetTrigger("RollLeft");
+                    StartCoroutine(RollMoveLeft());
+                    aTapCount = 0;
+                }
+            }
+            else
+            {
+                aTapCount = 1;
+            }
+
+            aLastTapTime = Time.time;
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if ((Time.time - dLastTapTime) < doubleTapThreshold)
+            {
+                dTapCount++;
+
+                if (dTapCount == 2)
+                {
+                    animator.SetTrigger("RollRight");
+                    StartCoroutine(RollMoveRight());
+                    dTapCount = 0;
+                }
+            }
+            else
+            {
+                dTapCount = 1;
+            }
+
+            dLastTapTime = Time.time;
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if ((Time.time - sLastTapTime) < doubleTapThreshold)
+            {
+                sTapCount++;
+
+                if (sTapCount == 2)
+                {
+                    animator.SetTrigger("RollBack");
+                    StartCoroutine(RollMoveBack());
+                    sTapCount = 0;
+                }
+            }
+            else
+            {
+                sTapCount = 1;
+            }
+
+            sLastTapTime = Time.time;
         }
     }
 
@@ -295,14 +364,14 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = walkSpeed;
         EventManager.TriggerEvent<WalkEvent, Vector3>(new Vector3());
-        animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+        animator.SetFloat("Speed", 0.25f, 0.1f, Time.deltaTime);
     }
 
     // Set player state to running
     private void Run()
     {
         moveSpeed = runSpeed;
-        animator.SetFloat("Speed", 1, 0.1f, Time.deltaTime);
+        animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
     }
 
     private void Backward()
@@ -312,18 +381,37 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", -0.5f, 0.1f, Time.deltaTime);
     }
 
-    // Strafing to the right
+    // Strafing to the right with a coroutine
     private void RightTurn()
     {
         animator.SetFloat("Strafe", 1.0f);
+        StartCoroutine(StrafeCoroutine(transform.right));
     }
 
-    // Strafing to the left
+    // Strafing to the left with a coroutine
     private void LeftTurn()
     {
         animator.SetFloat("Strafe", -1.0f);
+        StartCoroutine(StrafeCoroutine(-transform.right));
     }
 
+    // Coroutine for turning
+    private IEnumerator StrafeCoroutine(Vector3 direction)
+    {
+        float strafeDuration = 1.0f; // Duration of the strafe
+        float strafeDistance = 5.0f; // Distance to strafe, adjust as needed
+
+        float timer = 0;
+        while (timer < strafeDuration)
+        {
+            moveDirection = direction * strafeDistance / strafeDuration;
+            yield return null;
+            timer += Time.deltaTime;
+        }
+
+        yield return new WaitForSeconds(strafeDuration);
+        moveDirection = Vector3.zero;
+    }
 
     // Coroutine for performing a jump
     private IEnumerator Jump()
@@ -341,6 +429,72 @@ public class PlayerMovement : MonoBehaviour
             inAir = false;  // Set inAir to false once the jump is completed
             animator.SetTrigger("Idle");
             animator.SetLayerWeight(animator.GetLayerIndex("Jump Layer"), 0);
+        }
+    }
+
+    private IEnumerator RollMoveLeft()
+    {
+        // Wait for 0.5 seconds before starting the roll movement
+        yield return new WaitForSeconds(0.4f);
+
+        float rollDuration = 1.0f; // Updated duration of the roll
+        float rollDistance = 5f; // Distance to move during the roll
+        Vector3 rollDirection = -transform.right; // Roll to the left
+
+        float timer = 0;
+        while (timer < rollDuration)
+        {
+            // Calculate how far to move this frame
+            Vector3 displacement = rollDirection * (rollDistance / rollDuration) * Time.deltaTime;
+            // Use CharacterController.Move for movement
+            controller.Move(displacement);
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator RollMoveRight()
+    {
+        // Wait for 0.5 seconds before starting the roll movement
+        yield return new WaitForSeconds(0.4f);
+
+        float rollDuration = 1.0f; // Updated duration of the roll
+        float rollDistance = 5f; // Distance to move during the roll
+        Vector3 rollDirection = transform.right; // Roll to the right
+
+        float timer = 0;
+        while (timer < rollDuration)
+        {
+            // Calculate how far to move this frame
+            Vector3 displacement = rollDirection * (rollDistance / rollDuration) * Time.deltaTime;
+            // Use CharacterController.Move for movement
+            controller.Move(displacement);
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator RollMoveBack()
+    {
+        // Wait for 0.5 seconds before starting the roll movement
+        yield return new WaitForSeconds(0.4f);
+
+        float rollDuration = 1.0f; // Updated duration of the roll
+        float rollDistance = 5f; // Distance to move during the roll
+        Vector3 rollDirection = -transform.forward; // Roll to the back
+
+        float timer = 0;
+        while (timer < rollDuration)
+        {
+            // Calculate how far to move this frame
+            Vector3 displacement = rollDirection * (rollDistance / rollDuration) * Time.deltaTime;
+            // Use CharacterController.Move for movement
+            controller.Move(displacement);
+
+            timer += Time.deltaTime;
+            yield return null;
         }
     }
 
