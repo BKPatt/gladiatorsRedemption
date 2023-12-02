@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     // Private variables for internal state and logic
     private Vector3 moveDirection;
     private Vector3 velocity;
+    Quaternion MyQuaternion;
 
     private float aLastTapTime = 0f;
     private int aTapCount = 0;
@@ -502,11 +503,21 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Attack()
     {
         inAttackPlayer = true;
+        float moveZ = Input.GetAxis("Vertical");
+        moveDirection = new Vector3(0, 0, Mathf.Abs(moveZ));
+        moveDirection = transform.TransformDirection(moveDirection);
         animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 1);
         animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(2.0f);
-        animator.SetTrigger("Idle");
+        //animator.SetTrigger("Idle");
+
+        //Set the Quaternion rotation from the GameObject's position to the mouse position
+        MyQuaternion.SetFromToRotation(transform.position, moveDirection);
+        //Move the GameObject towards the mouse position
+        transform.position = Vector3.Lerp(transform.position, moveDirection, turnSpeed * Time.deltaTime);
+        //Rotate the GameObject towards the mouse position
+        transform.rotation = MyQuaternion * transform.rotation;
         animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 0);
         inAttackPlayer = false;
     }
