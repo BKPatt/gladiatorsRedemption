@@ -673,14 +673,17 @@ public class DialogManager : MonoBehaviour
             {
                 case "Minotaur":
                     playerMovement.battleAxe.SetActive(true);
+                    PlayerPrefs.SetString("weapon", "Minotaur");
                     dummy.SetActive(true);
                     break;
                 case "Dimachaeru":
                     playerMovement.halberd.SetActive(true);
+                    PlayerPrefs.SetString("weapon", "Dimachaeru");
                     dummy.SetActive(true);
                     break;
                 case "Sagittarii":
                     playerMovement.sword.SetActive(true);
+                    PlayerPrefs.SetString("weapon", "Sagittarii");
                     dummy.SetActive(true);
                     break;
                 default:
