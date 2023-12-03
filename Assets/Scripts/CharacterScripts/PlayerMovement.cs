@@ -59,6 +59,28 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         inAttackPlayer = false;
+
+        if (SceneManager.GetActiveScene().name == "Colosseum")
+        {
+            var weapon = PlayerPrefs.GetString("weapon");
+
+            switch (weapon)
+            {
+                case "Minotaur":
+                    battleAxe.SetActive(true);
+                    break;
+                case "Dimachaeru":
+                    halberd.SetActive(true);
+                    break;
+                case "Sagittarii":
+                    sword.SetActive(true);
+                    break;
+                default:
+                    // if nothing matches
+                    halberd.SetActive(true);
+                    break;
+            }
+        }
     }
 
     // Main update loop
