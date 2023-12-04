@@ -395,6 +395,9 @@ public class PlayerMovement : MonoBehaviour
     {
         moveSpeed = runSpeed;
         animator.SetFloat("Speed", 0.5f, 0.1f, Time.deltaTime);
+
+        Vector3 move = transform.forward * moveSpeed * Time.deltaTime;
+        controller.Move(move);
     }
 
     private void Backward()
@@ -443,7 +446,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = false;
             inAir = true;
-            animator.SetLayerWeight(animator.GetLayerIndex("Jump Layer"), 1);
             animator.SetTrigger("Jump");
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
 
@@ -451,7 +453,6 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = true;
             inAir = false;  // Set inAir to false once the jump is completed
             animator.SetTrigger("Idle");
-            animator.SetLayerWeight(animator.GetLayerIndex("Jump Layer"), 0);
         }
     }
 
@@ -528,7 +529,6 @@ public class PlayerMovement : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical");
         moveDirection = new Vector3(0, 0, Mathf.Abs(moveZ));
         moveDirection = transform.TransformDirection(moveDirection);
-        animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 1);
         animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(2.0f);
@@ -540,7 +540,6 @@ public class PlayerMovement : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, moveDirection, turnSpeed * Time.deltaTime);
         //Rotate the GameObject towards the mouse position
         transform.rotation = MyQuaternion * transform.rotation;
-        animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 0);
         inAttackPlayer = false;
     }
 

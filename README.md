@@ -47,6 +47,9 @@ Post Alpha:
 7. Look into the strafing issue and fixed that.
 8. Gameplay video
 9. Revamped the AI a bit.
+10. Fixed camera angles and moving while character moves.
+11. Fixed the attack clipping.
+12. Fixed the jump clipping.
 Scripts added/edited: DialogManager, PlayerMovement, CharacterAI
 
 Shiyu Liu:

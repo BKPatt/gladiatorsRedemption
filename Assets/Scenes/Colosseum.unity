@@ -3871,7 +3871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0
   walkSpeed: 0.5
-  runSpeed: 1
+  runSpeed: 5
   turnSpeed: 700
   proximityRadius: 2
   detectableObjects:
@@ -6630,6 +6630,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4df32b9618f8d4a3094eb9fd9a58d9d5, type: 2}
+    - target: {fileID: 5028086758490394123, guid: 9d63824583439ac488f7e2e0973d9a7c, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d63824583439ac488f7e2e0973d9a7c, type: 3}
 --- !u!1 &826378223 stripped
