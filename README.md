@@ -73,7 +73,9 @@ Ashok:
 4. Added bear asset to the project, fours instances are present in the Play arena scene
 5. Added hotkeys setup for the scenes, hot keys added to toggle between all scenes
 5. Added audio assets and prefabs
-Scripts added/edited: HotKeyScript,AudioEventManager, EventSound3D, BGController, WalkEvent  
+6. Fixed the issues with AI circling the player, optimised the path finding and attacking parts
+7. Used PlayerPrefs Unity Class to store the weapons info and share the info across the scenes
+Scripts added/edited: HotKeyScript,AudioEventManager, EventSound3D, BGController, WalkEvent, AIMovement, PlayerMovement, DialogueManagement  
 
 Cole:
 1. Added the player combat and the fight scenes in the main Colosseum arena while modifying PlayerMovement
