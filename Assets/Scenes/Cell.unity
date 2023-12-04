@@ -23358,7 +23358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292426440}
   m_LocalRotation: {x: 0.26923633, y: -0.000000029802322, z: -0.000000014901161, w: 0.96307415}
-  m_LocalPosition: {x: -0.11999965, y: 2.1999998, z: -1.5800014}
+  m_LocalPosition: {x: -0.12, y: 2.371, z: -1.477}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32033,7 +32033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   walkSpeed: 0.5
-  runSpeed: 1
+  runSpeed: 5
   turnSpeed: 700
   proximityRadius: 2
   detectableObjects:
