@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1023,6 +1023,8 @@ GameObject:
   - component: {fileID: 200456985}
   - component: {fileID: 200456987}
   - component: {fileID: 200456986}
+  - component: {fileID: 200456989}
+  - component: {fileID: 200456988}
   m_Layer: 7
   m_Name: Halberd
   m_TagString: Untagged
@@ -1095,6 +1097,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200456984}
   m_Mesh: {fileID: -5237451548606234237, guid: 9dd06d4cdb3e2b14abc0d1f051305067, type: 3}
+--- !u!114 &200456988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200456984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408bd5f01942b0e46bfd89a39e70bc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  playerMovement: {fileID: 458663007}
+--- !u!65 &200456989
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200456984}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4927058, y: 0.43174574, z: 0.06269509}
+  m_Center: {x: 0.000000006665176, y: 0.41788384, z: -0.00000023125759}
 --- !u!1 &213921613
 GameObject:
   m_ObjectHideFlags: 0
@@ -10970,6 +10999,8 @@ GameObject:
   - component: {fileID: 1565889719}
   - component: {fileID: 1565889721}
   - component: {fileID: 1565889720}
+  - component: {fileID: 1565889723}
+  - component: {fileID: 1565889722}
   m_Layer: 7
   m_Name: Sword
   m_TagString: Untagged
@@ -11042,6 +11073,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565889718}
   m_Mesh: {fileID: 5332262856607721665, guid: 5976ada632e799346ad05cc53e3bda68, type: 3}
+--- !u!114 &1565889722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565889718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408bd5f01942b0e46bfd89a39e70bc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  playerMovement: {fileID: 458663007}
+--- !u!65 &1565889723
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565889718}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.4927058, y: 0.43174574, z: 0.06269509}
+  m_Center: {x: 0.000000006665176, y: 0.41788384, z: -0.00000023125759}
 --- !u!1 &1569371951
 GameObject:
   m_ObjectHideFlags: 0
