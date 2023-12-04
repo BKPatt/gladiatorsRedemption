@@ -60,6 +60,14 @@ Shiyu Liu:
 5. Created a camera controller to the player to test player movement
 6. Cleaned up all the assets and codes with comments 
 Scripts added/edited/debugged with identifying issues: PlayerMovement, CameraController, EventManager, AIMovement, playerHealth, EnemyHealth.
+Post Alpha: 
+1. Worked on the playtest analysis and playtest report based on playtest results. 
+2. looked into left and right turns
+3. added animations for the rest 4 characters including idle, walk, run, backwards walk, left turn, right turn, jump and attack.
+4. fixed the attack animations
+5. looked into menu at the beginning of controls
+Scripts added/edited: MainMenu, PlayerMovement. 
+
 
 Seth:
 1. Designed and integrated MainMenu and Respawn Scenes, and PauseMenu canvas.
