@@ -96,4 +96,7 @@ Cole:
 4. Created the UI health bars and tracking of damage done using colliders and triggers on enemy and player axe
 5. Modified CameraController script to back off on its focus on the player
 6. Also created EnemyAxe and SwordHit scripts to check if collisions occurred between weapons and player/enemy and doc health from each
-Scripts added/edited: PlayerMovement, CameraController, AIMovement, playerHealth, EnemyHealth, EnemyAxe, SwordHit
+7. Added Dummy_Controller so that the player can attack the dummy and the dummy visually shows a response to being hit
+8. Fixed the jump so that the player wasn't infinitely jumping using a raycast to ground approach
+9. Fixed the tilt that the character kept doing as a result of landing on uneven platforms
+Scripts added/edited: PlayerMovement, CameraController, AIMovement, playerHealth, EnemyHealth, EnemyAxe, SwordHit, Dummy_Controller
