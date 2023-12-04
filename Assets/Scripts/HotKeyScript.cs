@@ -14,7 +14,7 @@ public class HotKeyScript : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        /* if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SceneManager.LoadScene("Cell");
             return;
@@ -30,6 +30,6 @@ public class HotKeyScript : MonoBehaviour
         {
             SceneManager.LoadScene("TrainingRoom");
             return;
-        }
+        } */
     }
 }

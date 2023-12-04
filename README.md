@@ -6,34 +6,24 @@ Start Scene: MainMenu
 
 
 Instructions:
-Start in the cell and talk to your cellmates, they will point you to leave the cell. As you leave the cell and walk towards the training room upstairs, Draxus the guard will confront you and eventually tell you where to go. The cells are meant to be an area where the story progresses and dialogue happens. You will then go upstairs to the right, and interact with the big double doors to enter the training room. When starting in the training room, the player will auto enter dialogue with Caelia the trainer, if you interact with her after this dialogue she will point you to leave the training room when ready. In the future, the training room will allow the player to improve their skills outside of the colosseum and also an area for the player to interact with NPCs outside of their cell. When done, you go interact with the double doors at the top of the stairs and move onto the Colosseum scene. You will start dialogue with your opponent and go through a couple of options of hearing people talk, interacting with the crowd, etc. The player will then be traveled back to the Cell scene when defeating the enemy (or able to respawn if they lost to the opponent which will restart the Colosseum scene), where they will enter one more dialogue with Quintus before the content for now ends.
+Start in the cell and talk to your cellmates, they will point you to leave the cell. As you leave the cell and walk towards the training room upstairs, Draxus the guard will confront you and eventually tell you where to go. The cells are meant to be an area where the story progresses and dialogue happens. You will then go upstairs to the right, and interact with the big double doors to enter the training room. When starting in the training room, the player will auto enter dialogue with Caelia the trainer, if you interact with her after this dialogue she will point you to leave the training room when ready. The training room allows the player to choose between the 3 clans changing the weapon they will have in the fight, and you can test the weapon on the training dummy that appears after choosing a clan. When done, you go interact with the double doors at the top of the stairs and move onto the Colosseum scene. You will start dialogue with your opponent and go through a couple of options of hearing people talk, interacting with the crowd, etc. The player will then be given a game over screen when defeating the enemy (or able to respawn if they lost to the opponent which will restart the Colosseum scene).
 
 Button Mappings:
 W: Forward
 A: Left
+Double tap A: roll left
 S: Backwards (known issue about moving forward slightly after moving back)
+Double tap S: roll backwards
 D: Right
+Double tap D: roll right
 Space: Jump
 Left Click: Attack
 P: Pause/Resume
 
-Following Number keys can be used as shortcuts to toggle between scenes.
-
-| Scene  | Shortcut  |
-|:--------:| -------------:|
-| Cell| 1 |
-| Colosseum| 2 |
-| TrainingRoom| 3 |
-
 
 Known Problem Areas: 
-1. AI is iffy and early development, so it can circle the player or have some odd behavior.
-2. Draxus is supposed to go back to his traversal after interacting with the player, but right now instead stays where the interactions starts and turns towards the player.
-3. Load/Save function is developed, but does not yet work as what data to be saved/loaded has not been determined.
-4. There is no end scene yet, so after beating the NPC the NPC is just destroyed and nothing happens yet.
-5. Some scene changes have differences in lighting.
-6. Player has sliding effects when moving, needs animation adjustments.
-7. Attack animation can be odd since it resets with any slight movement.
+1. Draxus is supposed to go back to his traversal after interacting with the player, but right now instead stays where the interactions starts and turns towards the player.
+2. Attack animation can be odd sometimes and start in the middle of the animation for some reason
 
 
 Who Did What:
@@ -47,6 +37,17 @@ Brantley:
 6. Added a rough camera controller to the player to work with PlayerMovement
 7. Added logic to move between scenes with the doors.
 Scripts added/edited: DialogManager, PlayerMovement, DialogueOption, DialogueScene, DialogueNode, DialogueEvent, DoorController, DoorSelector, CameraController, ChangeButtonTextColor, CharacterAI
+Post Alpha:
+1. Revamped the dialogue.
+2. Added different weapons based on dialogue in the training room.
+3. Added the ability to talk to the opponent in the training room.
+4. Added some dialogue hints to the training room where the choices matter.
+5. Made the attack UI around training dummy clearer
+6. Added dodging left right and back
+7. Look into the strafing issue and fixed that.
+8. Gameplay video
+9. Revamped the AI a bit.
+Scripts added/edited: DialogManager, PlayerMovement, CharacterAI
 
 Shiyu Liu:
 1. Generated all the animations to 9 characters including idle, walk, run, backwards walk, left turn, right turn, jump and attack.
