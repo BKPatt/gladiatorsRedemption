@@ -130,13 +130,11 @@ public class AIMovement : MonoBehaviour
     private IEnumerator Attack()
     {
         inAttackAI = true;
-        animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 1);
         animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(1.5f);
 
         animator.SetTrigger("Idle");
-        animator.SetLayerWeight(animator.GetLayerIndex("Attack Layer"), 0);
         yield return new WaitForSeconds(1.5f);
 
         gameObject.GetComponent<NavMeshAgent>().enabled = false;
