@@ -68,7 +68,7 @@ Seth:
 4. Implemented a DataPersistenceManager to support load/save functionality in game.
 5. Discovered Artlist.io as a source for license free music and SFX.
 6. Added music to all menus and scenes or engaging UX.
-Scripts added/edited: MainMenu, PauseMenu, ColosseumRespawn, playerHealth, DataPersistenceManager, FileDataHandler, IDataPersistence, GameData
+Scripts added/edited: MainMenu, PauseMenu, ColosseumRespawn, ColosseumGameOver, playerHealth, enemyHealth, DataPersistenceManager, FileDataHandler, IDataPersistence, GameData
 
 Ashok:
 1. Added sound setup to the game and added the Backgoround scrore to the scenes.
